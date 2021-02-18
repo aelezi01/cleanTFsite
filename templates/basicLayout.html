@@ -17,13 +17,13 @@
         </div>
         
         <!--this section codes for the top menu bar-->
-        <div style="border: 2px solid black; border-radius: 40px;">
+        <div class="mainMenu">
             <ul>
             <li><a href="{{ url_for('home') }}" class="a-homepage">TFs&co.</a></li>
-            <li class="mainMenu"><a href="{{ url_for('TF_search') }}" class="linksMainMenu">Transcription Factors</a></li>
-            <li class="mainMenu"><a href="{{ url_for('drugs_search') }}" class="linksMainMenu">Drugs</a></li>
-            <li class="mainMenu"><a href="{{ url_for('upload_data') }}" class="linksMainMenu">Upload Data</a></li>
-            <li class="mainMenu"><a href="{{ url_for('contactus') }}" class="linksMainMenu">Contact Us</a></li>
+            <li class="mainMenuLi"><a href="{{ url_for('TF_search') }}" class="linksMainMenu">Transcription Factors</a></li>
+            <li class="mainMenuLi"><a href="{{ url_for('drugs_search') }}" class="linksMainMenu">Drugs</a></li>
+            <li class="mainMenuLi"><a href="{{ url_for('upload_data') }}" class="linksMainMenu">Upload Data</a></li>
+            <li class="mainMenuLi"><a href="{{ url_for('contactus') }}" class="linksMainMenu">Contact Us</a></li>
             </ul> 
         </div>
 

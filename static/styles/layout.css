@@ -1,8 +1,14 @@
 /* main menu */
 
 .mainMenu {
+    color: #e0f2f1;
+    border: 2px solid black; 
+    border-radius: 40px;
+}
+
+.mainMenuLi {
     float: left;
-    background-color:  #5f9ea0;
+    background-color:  #e0f2f1;
     margin: 0px;
     padding-top: 0px;
 }
@@ -58,6 +64,12 @@ footer {
     height: 200px;
 }
 
+.containerHome {
+    border: 2px black solid;
+    padding: 30px;
+    background-color:#f8f8ff;
+}
+
 .buttonsHome {
     flex-basis:20%;
     text-decoration: none;
@@ -75,7 +87,7 @@ footer {
 
 /* Small devices (phones) */
 
-#wrapper {width:98%;  margin: 0 auto; }
+#wrapper {width:95%;  margin: 0 auto; }
 
 #header {width:100%; }
 
@@ -101,7 +113,7 @@ footer {
 
 /* Large devices (desktops, 992px and up) */
 
-@media (min-width: 992px) { ... }
+@media (min-width: 992px) { ...
 
 }   
 
