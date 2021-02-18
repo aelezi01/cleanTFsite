@@ -2,4 +2,78 @@
 
 {% block content %}
 
+<!--this section codes for the side menu bar-->
+<div style="width: 90%; position: fixed; z-index: 1; top: 33%; left: 20px;">
+    <ul class="sidebar">
+      <li><a class="active" href="Upload data">Upload data</a></li>
+      <li><a class="sidebarLI" href="Results">Results</a></li>
+    </ul>
+</div>
+
+<div style="margin-left: 25%; padding: 1px 16px;">
+    <h2 style="color: black;">Upload your GEO dataset</h2>
+</div>
+
+<div style="margin-left: 25%; padding: 1px 16px;">
+    <!--if the file uploaded is not compatible, display an info message about it-->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}
+          <p>{{msg}}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+</div>
+  
+
+<form action="#" method='POST'>
+    <!--the user can upload their data file here-->
+    <div style="margin-left: 25%; padding: 1px 16px;">
+        <section>
+            <div>
+            <label for="file_name">Name of the dataset:</label><br>
+            <input type="text" id="file_name" name="file_name" style="border: 1px solid black;"><br>
+            </div><br>
+            <div>
+            <br>
+            <label for="file" >Upload here:</label>
+            <input type="file" id="file" name="file" value="Select file" style="background-color: white; color: black;" required><br>
+            </div>
+        </section>
+      
+        <!--Here the user can select the graphs and data analysis they need-->
+        <div>
+            <br>
+            <p>A basic statistical analysis will display. <br>
+                Please select any additional statistical analysis and graphs required.</p>
+        </div>
+      
+        <div>
+            <div>
+            <input type="checkbox" value="" id="">
+            <label for="">Principal Component Analysis (PCA)</label>
+            </div>
+            <div>
+            <input type="checkbox" value="" id="">
+            <label for="">Hierarchical Clustering Analysis (HCA)</label>
+            </div>
+            <div>
+            <input type="checkbox" value="" id="">
+            <label for="">Heatmap</label>
+            </div>
+            <div>
+            <input type="checkbox" value="" id="">
+            <label for="">Differential gene expression</label><br>
+            </div>
+            <div>
+            <input type="checkbox" value="" id="">
+            <label for="">Volcano plot</label>
+            </div>
+            <br><br>
+        </div>
+        <input value="Upload" type="submit" style="margin-left: 20px; color: black; background-color: white; border: 1px solid black;">
+        <br><br>
+    </div>
+</form>
+
 {% endblock %}

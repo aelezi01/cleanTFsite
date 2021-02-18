@@ -2,4 +2,31 @@
 
 {% block content %}
 
+<div>
+    <h1>Search the desired drug in our database</h1>
+</div>
+
+<div>
+    <!--if the drug searched is not in our database, flash an info message about it-->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}
+          <p>{{msg}}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+</div>
+  
+
+<div>
+    <!--user will input their drug searches in this form-->
+    <form action="#" method="post">
+      <div>
+        <label for="drugs_search">Search:</label><br>
+        <input type="text" name="drugs_search" id="drugs_search" required style="border: 1px solid black;"><br>
+        <input type="submit"><br><br>
+      </div>
+    </form>
+</div>
+
 {% endblock %}

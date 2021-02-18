@@ -1,0 +1,35 @@
+{% extends 'basicLayout.html' %}
+
+{% block content %}
+
+<div class="container-3">
+    <div>
+      <h2 style="text-align: center; color: black;">Contact us</h2>
+      <p>The scientific community relies on everyone's individual efforts to develop. 
+        If you notice any bugs, have a suggestion for any improvements or would like to complain about 
+        this website... please get in touch! 
+      </p> 
+    </div>
+
+    <!--here the user can input their own comments alongside their basic info-->
+    <form action="#" method='post'>
+      <div>
+        <label for="name">Enter your name here:</label><br>
+        <input type="text" id="name" name="nm" required style="border: 1px solid black;"><br>
+      </div>
+      <div>
+        <label for="email">Your email address:</label><br>
+        <input type="email" name="email" id="email" required style="border: 1px solid black;"><br>
+      </div>
+      <div>
+        <label for="comments">Insert your comments here:</label><br>
+        <textarea name="comments" id="comments" cols="10" rows="5" required style="border: 1px solid black;"></textarea>
+      </div>
+      <div>
+        <br>
+        <input type="submit" value="submit">
+      </div>
+    </form>
+</div>
+
+{% endblock %}
