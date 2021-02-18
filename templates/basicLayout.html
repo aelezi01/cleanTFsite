@@ -1,0 +1,46 @@
+<html lang="en">
+    <head>
+        
+        <!--responsive viewport meta tags for touchscreen devices-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            
+        <!--CSS styles-->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/layout.css') }}">
+
+
+        <title> TFs&co.</title>
+        <!--Header section of the page-->
+        <div style="margin-bottom:0">
+            <h1 style="text-align: center">Transcription Factors & co.</h1> 
+            <br>
+        </div>
+        
+        <!--this section codes for the top menu bar-->
+        <div style="border: 2px solid black; border-radius: 40px;">
+            <ul>
+            <li><a href="{{ url_for('home') }}" class="a-homepage">TFs&co.</a></li>
+            <li class="mainMenu"><a href="{{ url_for('TF_search') }}" class="linksMainMenu">Transcription Factors</a></li>
+            <li class="mainMenu"><a href="{{ url_for('drugs_search') }}" class="linksMainMenu">Drugs</a></li>
+            <li class="mainMenu"><a href="{{ url_for('upload_data') }}" class="linksMainMenu">Upload Data</a></li>
+            <li class="mainMenu"><a href="{{ url_for('contactus') }}" class="linksMainMenu">Contact Us</a></li>
+            </ul> 
+        </div>
+
+        <div class="space"></div>
+    </head>
+
+    <body>
+        <!--the content of the page can be added in this block-->
+        {% block content %}
+
+        {% endblock %}
+
+        <footer class="footer">
+            <h2>Disclaimer</h2>
+            <p>The information in this website must not be used for self-treatment. <br>
+              Please seek medical advice if you are considering taking 
+              any of the drugs mentioned in this website.</p>
+        </footer>
+    </body>
+</html>

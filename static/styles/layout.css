@@ -1,0 +1,112 @@
+/* main menu */
+
+.mainMenu {
+    float: left;
+    background-color:  #5f9ea0;
+    margin: 0px;
+    padding-top: 0px;
+}
+
+.a-homepage{
+    font-size: 24px;
+    text-decoration: none;
+    display: block;
+    padding: 39.5px;
+    background-color: #e0f2f1;
+    color: black;
+    float: left;
+    border-radius: 40px black;
+}
+
+.linksMainMenu {
+    text-decoration: none;
+    color: black;
+    padding: 42px;
+    font-size: 20px;
+    border-radius: 40px solid black;
+    font-family: 'Raleway', sans-serif;
+}
+
+.linksMainMenu:hover {
+    color: teal;
+}
+
+li.mainMenu a.linksMainMenu {
+    background-color: #e0f2f1;
+    padding: 8px 16px;
+  }
+
+
+
+/* footer section */
+
+footer {
+    padding: 10px;
+    background-color:  #5f9ea0;
+    color: whitesmoke;
+    text-align: center;
+    display: -ms-inline-flexbox;
+    border-top: 2px solid black;
+    bottom: 0%;
+    width: 100%;
+    margin-top: auto;
+}
+
+/* extras */
+
+.space {
+    height: 200px;
+}
+
+.buttonsHome {
+    flex-basis:20%;
+    text-decoration: none;
+    color: teal;
+    font-family: 'Open sans', sans-serif;
+    text-align: center;
+    border-radius: 25px;
+    padding-top: 10px;
+    padding-bottom: 40px;
+}
+
+/* layout */
+
+/* Small devices (phones) */
+
+#wrapper {width:98%;  margin: 0 auto; }
+
+#header {width:100%; }
+
+#content {width:100%; }
+
+#sidebar {width:100%; }
+
+#footer {width:100%; margin-bottom: 0%;}
+
+/* Small devices (landscape phones, 576px and up) */
+
+@media (min-width: 576px) {
+
+/* Medium devices (tablets, 768px and up) */
+
+@media (min-width: 768px) {
+
+    #wrapper {width:90%;  margin: 0 auto; }
+
+    #content {width:70%; float:left; }
+
+    #sidebar {width:30%; float:right; }
+
+/* Large devices (desktops, 992px and up) */
+
+@media (min-width: 992px) { ... }
+
+}   
+
+/* Extra large devices (large desktops, 1200px and up) */
+
+@media (min-width: 1200px) {
+
+#wrapper {width:90%;  margin: 0 auto; }
+
+}
