@@ -2,6 +2,7 @@
 
 .mainMenu {
     color: #e0f2f1;
+    background-color: #e0f2f1;
     border: 2px solid black; 
     border-radius: 40px;
 }
@@ -64,10 +65,14 @@ footer {
     height: 200px;
 }
 
+/* Home page */
+
 .containerHome {
-    border: 2px black solid;
     padding: 30px;
     background-color:#f8f8ff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: stretch;
 }
 
 .buttonsHome {
@@ -76,6 +81,7 @@ footer {
     color: teal;
     font-family: 'Open sans', sans-serif;
     text-align: center;
+    border: 2px solid black;
     border-radius: 25px;
     padding-top: 10px;
     padding-bottom: 40px;
@@ -113,14 +119,15 @@ footer {
 
 /* Large devices (desktops, 992px and up) */
 
-@media (min-width: 992px) { ...
+@media (min-width: 992px) {
 
+    #wrapper {width:90%;  margin: 0 auto; }
 }   
 
 /* Extra large devices (large desktops, 1200px and up) */
 
 @media (min-width: 1200px) {
 
-#wrapper {width:90%;  margin: 0 auto; }
+    #wrapper {width:90%;  margin: 0 auto; }
 
 }
