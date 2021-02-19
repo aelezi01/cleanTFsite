@@ -2,11 +2,12 @@
 
 {% block content %}
 
-<div>
+<div class="contentMargin">
+  <div style="text-align: center;">
     <h1>Search the desired drug in our database</h1>
-</div>
+  </div>
 
-<div>
+  <div>
     <!--if the drug searched is not in our database, flash an info message about it-->
     {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -15,10 +16,10 @@
         {% endfor %}
       {% endif %}
     {% endwith %}
-</div>
+  </div>
   
 
-<div>
+  <div>
     <!--user will input their drug searches in this form-->
     <form action="#" method="post">
       <div>
@@ -27,6 +28,8 @@
         <input type="submit"><br><br>
       </div>
     </form>
+  </div>  
 </div>
+
 
 {% endblock %}

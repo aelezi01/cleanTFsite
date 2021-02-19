@@ -5,12 +5,12 @@
     background-color: #e0f2f1;
     border: 2px solid black; 
     border-radius: 40px;
+    padding: 30px;
 }
 
 .mainMenuLi {
     float: left;
     background-color:  #e0f2f1;
-    margin: 0px;
     padding-top: 0px;
 }
 
@@ -18,8 +18,7 @@
     font-size: 24px;
     text-decoration: none;
     display: block;
-    padding: 39.5px;
-    background-color: #e0f2f1;
+    background-color: #e0f2f1;s
     color: black;
     float: left;
     border-radius: 40px black;
@@ -55,14 +54,14 @@ footer {
     display: -ms-inline-flexbox;
     border-top: 2px solid black;
     bottom: 0%;
-    width: 100%;
     margin-top: auto;
 }
 
 /* extras */
 
-.space {
-    height: 200px;
+.contentMargin {
+    margin: 50px;
+    padding-left: 40px;
 }
 
 /* Home page */
@@ -81,10 +80,11 @@ footer {
     color: teal;
     font-family: 'Open sans', sans-serif;
     text-align: center;
-    border: 2px solid black;
+    border: 1px solid black;
     border-radius: 25px;
-    padding-top: 10px;
+    padding: 20px;
     padding-bottom: 40px;
+    margin: 30px auto;
 }
 
 
@@ -106,6 +106,8 @@ footer {
 /* Small devices (landscape phones, 576px and up) */
 
 @media (min-width: 576px) {
+    
+}
 
 /* Medium devices (tablets, 768px and up) */
 
@@ -117,11 +119,16 @@ footer {
 
     #sidebar {width:30%; float:right; }
 
+    #footer {width:100%; margin-bottom: 0%;}
+}
+
 /* Large devices (desktops, 992px and up) */
 
 @media (min-width: 992px) {
 
     #wrapper {width:90%;  margin: 0 auto; }
+
+    #footer {width:100%; margin-bottom: 0%;}
 }   
 
 /* Extra large devices (large desktops, 1200px and up) */
@@ -129,5 +136,7 @@ footer {
 @media (min-width: 1200px) {
 
     #wrapper {width:90%;  margin: 0 auto; }
+
+    #footer {width:100%; margin-bottom: 0%;}
 
 }
