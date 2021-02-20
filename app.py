@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
+import functions_for_samar
+import graphsFunctions
 
 # create a flask application object
 app_obj = Flask(__name__)
@@ -145,6 +147,7 @@ def stat_analysis(newdata):
 
 
 # contact us pages
+
 @app_obj.route('/contactus/', methods=['GET', 'POST'])
 def contactus():
     if request.method == 'POST':

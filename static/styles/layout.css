@@ -64,6 +64,17 @@ footer {
     padding-left: 40px;
 }
 
+.flashed {
+    text-align: center;
+    padding: 20px;
+    margin: 40px;
+    box-shadow: 0px 0px 3px 0.1px gray
+}
+
+.styleBoxes {
+    background-color: #f8f8f8;
+}
+
 /* Home page */
 
 .containerHome {

@@ -12,7 +12,7 @@
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             {% for msg in messages %}
-              <p>{{msg}}</p>
+              <p class="flashed">{{msg}}</p>
             {% endfor %}
           {% endif %}
         {% endwith %}
@@ -41,30 +41,26 @@
                     Please select any additional statistical analysis and graphs required.</p>
             </div>
           
-            <div>
-                <div>
-                <input type="checkbox" value="" id="">
-                <label for="">Principal Component Analysis (PCA)</label>
+            <div class="styleBoxes">
+                <div>                
+                    <label for=""><input type="checkbox" value="graph" name="PCA" checked>Principal Component Analysis (PCA)</label>
                 </div>
-                <div>
-                <input type="checkbox" value="" id="">
-                <label for="">Hierarchical Clustering Analysis (HCA)</label>
+                <div>                
+                    <label for=""><input type="checkbox" value="graph" name="HCA" checked>Hierarchical Clustering Analysis (HCA)</label>
                 </div>
-                <div>
-                <input type="checkbox" value="" id="">
-                <label for="">Heatmap</label>
+                <div>                
+                    <label for=""><input type="checkbox" value="graph" name="heatmap" checked>Heatmap</label>
                 </div>
-                <div>
-                <input type="checkbox" value="" id="">
-                <label for="">Differential gene expression</label><br>
+                <div>                
+                    <label for=""><input type="checkbox" value="graph" name="DGE" checked>Differential gene expression</label><br>
                 </div>
-                <div>
-                <input type="checkbox" value="" id="">
-                <label for="">Volcano plot</label>
+                <div>                
+                    <label for=""><input type="checkbox" value="graph" name="volcano" checked>Volcano plot</label>
                 </div>
                 <br><br>
             </div>
-            <input value="Upload" type="submit" style="margin-left: 20px; color: black; background-color: white; border: 1px solid black;">
+                <input value="Upload" type="submit" style="margin-left: 20px; color: black; background-color: white; border: 1px solid black;">
+                <input type="reset" value="Reset form">
             <br><br>
         </div>
     </form>
