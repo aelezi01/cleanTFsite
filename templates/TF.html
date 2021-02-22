@@ -2,36 +2,41 @@
 
 {% block content %}
 
-<!--this section codes for the side menu bar-->
-<div style="width: 90%; position: fixed; z-index: 1; top: 33%; left: 20px;">
-    <ul class="sidebar">
-      <li><a class="active" href="#TF_name">Transcription factor's name</a></li>
-      <li><a class="sidebarLI" href="#Ensembl ID">Ensembl ID</a></li>
-      <li><a class="sidebarLI" href="#Entrez ID">Entrez ID</a></li>
-      <li><a class="sidebarLI" href="#Pdb ID">Pdb ID</a></li>
-      <li><a class="sidebarLI" href="#DBD">DBD</a></li>
-      <li><a class="sidebarLI" href="#Go info">Go info</a></li>
-  
-    </ul>
-</div>
-  
+<div class="contentMargin">
+  <div style="display: flex;">
+    <!--this section codes for the side menu bar-->
+    <div class="sideBar">
+      <ul>
+        <li><a class="sidebarLI href="#TF_name">Transcription factor's name</a></li>
+        <li><a class="sidebarLI" href="#Ensembl ID">Ensembl ID</a></li>
+        <li><a class="sidebarLI" href="#Entrez ID">Entrez ID</a></li>
+        <li><a class="sidebarLI" href="#Pdb ID">Pdb ID</a></li>
+        <li><a class="sidebarLI" href="#DBD">DBD</a></li>
+        <li><a class="sidebarLI" href="#Go info">Go info</a></li>
+
+      </ul>
+    </div>
 
 
-<!--this section codes for the paragraphs with the information pulled from the SQL database-->
-<div style="margin-left: 25%; padding: 1px 16px;">
-    <h1 id="geneSymbol">{{TF_name}}</h1>
-    <h2 id="proteinNames" class="subheadings">Name of the protein</h2>
-    <p>{{proteinNames}}</p>
-    <h2 id="ensemblID" class="subheadings">Ensembl ID</h2>
-    <p>{{ensemblID}}</p>
-    <h2 id="entrezID" class="subheadings">Entrez ID</h2>
-    <p>{{entrezID}}</p>
-    <h2 id="pdbID" class="subheadings">Pdb ID</h2>
-    <p>{{pdbID}}</p>
-    <h2 id="uniprotID" class="subheadings">Uniprot ID</h2>
-    <p>{{uniprotID}}</p>
-    <h2 id="DBD" class="subheadings">DBD</h2>
-    <p>{{DBD}}</p>
+
+    <!--this section codes for the paragraphs with the information pulled from the SQL database-->
+    <div style="margin-left: 2%; flex: 3;">
+      <h1 id="geneSymbol">{{TF_name}}</h1>
+      <h2 id="proteinNames" class="subheadings">Name of the protein</h2>
+      <p>{{proteinNames}}</p>
+      <h2 id="ensemblID" class="subheadings">Ensembl ID</h2>
+      <p>{{ensemblID}}</p>
+      <h2 id="entrezID" class="subheadings">Entrez ID</h2>
+      <p>{{entrezID}}</p>
+      <h2 id="pdbID" class="subheadings">Pdb ID</h2>
+      <p>{{pdbID}}</p>
+      <h2 id="uniprotID" class="subheadings">Uniprot ID</h2>
+      <p>{{uniprotID}}</p>
+      <h2 id="DBD" class="subheadings">DBD</h2>
+      <p>{{DBD}}</p>
+    </div>
+  </div>
 </div>
+
 
 {% endblock %}

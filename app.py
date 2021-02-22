@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
+import sqlite3 as sql
 import functions_for_samar
 import graphsFunctions
 
@@ -23,7 +24,7 @@ def TF_search():
         protein = request.form['TF_protein']
 
         # connect to the database
-        con = sql.connect('web design/tfdata.db')
+        con = sql.connect('tfdata.db')
         c = con.cursor()
         # search for the protein within the database
         symbol = (protein,)
@@ -45,7 +46,7 @@ def TF_search():
 @app_obj.route('/TF/<TF_name>/')
 def TF(TF_name):
     # connect to the database
-    con = sql.connect('web design/tfdata.db')
+    con = sql.connect('tfdata.db')
     with con:
         c = con.cursor()
 
@@ -76,7 +77,7 @@ def drugs_search():
         drug = request.form['drugs_search']
 
         # connect to the database
-        con = sql.connect('web design/tfdata.db')
+        con = sql.connect('tfdata.db')
         c = con.cursor()
         # search for the drug within the different tables of the database
         symbol = (drug,)
@@ -98,7 +99,7 @@ def drugs_search():
 @app_obj.route('/drugs/<drug_name>/') 
 def drugs(drug_name):
     # connect to the database
-    con = sql.connect('web design/tfdata.db')
+    con = sql.connect('tfdata.db')
     with con:
         c = con.cursor()
 
