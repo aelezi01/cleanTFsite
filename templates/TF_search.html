@@ -3,31 +3,31 @@
 {% block content %}
 
 <div class="contentMargin">
-  <div style="text-align: center;">
-    <h1>Search the desired transcription factor in our database</h1>
-  </div>
+	<div style="text-align: center;">
+		<h1>Search the desired transcription factor in our database</h1>
+	</div>
 
-  <div>
-    <!--if the TF searched is not in our database, display an info message about it-->
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for msg in messages %}
-          <p class="flashed">{{msg}}</p>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
-  </div>
+	<div>
+		<!--if the TF searched is not in our database, display an info message about it-->
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				{% for msg in messages %}
+					<p class="flashed">{{msg}}</p>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+	</div>
 
-  <div>
-    <!--user will input their TF searches in this form-->
-    <form action="#" method="post">
-      <div>
-        <label for="TF_search">Search:</label><br>
-        <input type="text" name="TF_protein" id="TF_protein" placeholder='eg. CTCF' required style="border: 1px solid black;"><br><br>
-        <input type="submit"><br><br>
-      </div>
-    </form>
-  </div>
+	<div>
+		<!--user will input their TF searches in this form-->
+		<form action="#" method="post">
+			<div>
+				<label for="TF_search">Search:</label><br>
+				<input type="text" name="TF_protein" id="TF_protein" placeholder='eg. ARID5B' required style="border: 1px solid black;"><br><br>
+				<input type="submit"><br><br>
+			</div>
+		</form>
+	</div>
 </div>   
 
 

@@ -106,12 +106,23 @@ def drugs(drug_name):
         # select the whole row and fetch it
         resultDrug = (drug_name,)
         c.execute("SELECT * FROM drugs INNER JOIN drugsTF ON drugs.drugChemblID = drugsTF.drugChemblID WHERE name=?", resultDrug)
-        result = c.fetchall()
+        result1 = c.fetchone()
 
         #set up variables with info from the various fields so that they can be called within the html file
+        chemblID = result1[1]
+        drugName = result1[2]
+        INCHIkey = result1[3]
 
+        # gather information to display in the TF/drugs table
+        c.execute("""SELECT drugs.name, drugsTF.drugChemblID, drugsTF.bindingSiteName,
+        drugsTF.drugMechanism FROM drugs
+        INNER JOIN drugsTF ON drugs.drugChemblID = drugsTF.drugChemblID
+        INNER JOIN transcriptionFactors ON drugsTF.uniprotID = transcriptionFactors.uniprotID
+        WHERE transcriptionFactors.geneSymbol=?""", resultDrug)
+        result2 = c.fetchall()
+        result_list = [list(tuple) for tuple in result2]
 
-        return render_template('drugs.html', drug = drug_name)
+        return render_template('drugs.html', drug = drug_name, chemblID = chemblID, drugName = drugName, INCHIkey = INCHIkey)
 
 
 # upload data pages
@@ -119,7 +130,7 @@ def drugs(drug_name):
 ## this function checks if file is in allowed format
 def allowed_file(filename):
     """ returns True if file extension = gds or soft """
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ["gds","soft"]
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ["gds","soft", "tsv", "csv"]
 
 ## this page allows the user to upload the GEO dataset
 @app_obj.route('/upload_data/', methods=['GET', 'POST'])
@@ -129,7 +140,7 @@ def upload_data():
         if new_file is allowed_file == True:
             return redirect(url_for('stat_analysis', newdata = new_file))
         else:
-            flash('The file uploaded is not compatible with our analysis tools.' + '\t' + 'Please upload a gds or soft file instead.')
+            flash('The file uploaded is not compatible with our analysis tools.' + '\t' + 'Please upload a gds, soft, tsv or csv file instead.')
             return render_template('upload_data.html')
     else:
         return render_template('upload_data.html')
@@ -137,6 +148,12 @@ def upload_data():
 ## this page allows the user to access statistical analysis of their dataset
 @app_obj.route('/upload_data/<newdata>/')
 def stat_analysis(newdata):
+    new_file = request.form['file']
+
+    PCAgraph = request.form['PCA']
+    HCAgraph = request.form.ge
+
+
     gds = GDSinput(newdata)
     metadata = get_description(gds)
     simpleStatistic = get_sum(gds)
@@ -149,10 +166,17 @@ def stat_analysis(newdata):
 
 # contact us pages
 
+comments = []
+
 @app_obj.route('/contactus/', methods=['GET', 'POST'])
 def contactus():
     if request.method == 'POST':
         user = request.form['nm']
+        email = request.form['email']
+        comment = request.form['comments']
+
+        comments.append(f'{user} , {email} , {comment}')
+
         return redirect(url_for('user', usr=user))
     else:
         return render_template('contactus.html')

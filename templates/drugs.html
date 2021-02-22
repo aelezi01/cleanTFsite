@@ -2,15 +2,22 @@
 
 {% block content %}
 
-<li>
-    <h1>{{drug}}</h1>
-    <h2 class="subheadings">3D Structure</h2>
-    <p>image of the drug structure</p>
-    <h2 class="subheadings">Targets</h2>
-    <p>targets in general</p>
-    <h3 class="subheadings">TF targets</h2>
-    <p>specific tf targets</p>
+<div class="contentMargin">
+    <li>
+        <h1>{{drug}}</h1>
+        <h2 id="chemblID" class="subheadings">Chembl ID</h2>
+        <p>{{chemblID}}</p>
+        <h2 id="drugName" class="subheadings">Name</h2>
+        <p>{{drugName}}</p>
+        <h3 id="INCHIkey" class="subheadings">INCHI key</h2>
+        <p>{{INCHIkey}}</p>
+        <h3 id="drugMechanism" class="subheadings">Drug mechanism</h2>
+        <p>{{drugMechanism}}</p>
+        <h3 id="bindingSiteName" class="subheadings">Binding site name</h2>
+        <p>{{bindingSiteName}}</p>
+    
+    </li>
+</div>
 
-</li>
 
 {% endblock %}

@@ -5,8 +5,8 @@
 <div class="contentMargin">
   <div style="display: flex;">
     <!--this section codes for the side menu bar-->
-    <div class="sideBar">
-      <ul>
+    <div>
+      <ul class="sideBar">
         <li><a class="sidebarLI href="#TF_name">Transcription factor's name</a></li>
         <li><a class="sidebarLI" href="#Ensembl ID">Ensembl ID</a></li>
         <li><a class="sidebarLI" href="#Entrez ID">Entrez ID</a></li>
@@ -21,11 +21,9 @@
 
     <!--this section codes for the paragraphs with the information pulled from the SQL database-->
     <div style="margin-left: 2%; flex: 3;">
-      <h1 id="geneSymbol">{{TF_name}}</h1>
-      <h2 id="proteinNames" class="subheadings">Name of the protein</h2>
-      <p>{{proteinNames}}</p>
-      <h2 id="ensemblID" class="subheadings">Ensembl ID</h2>
-      <p>{{ensemblID}}</p>
+      <h1 id="geneSymbol" style="font-family: 'Oxygen', sans-serif;;">{{TF_name}}</h1>
+      <h2 id="ensemblID" style="font-family: 'PT Sans', sans-serif;">Ensembl ID</h2>
+      <p style="font-family: 'Oxygen', sans-serif;">{{ensemblID}}</p>
       <h2 id="entrezID" class="subheadings">Entrez ID</h2>
       <p>{{entrezID}}</p>
       <h2 id="pdbID" class="subheadings">Pdb ID</h2>
@@ -33,7 +31,7 @@
       <h2 id="uniprotID" class="subheadings">Uniprot ID</h2>
       <p>{{uniprotID}}</p>
       <h2 id="DBD" class="subheadings">DBD</h2>
-      <p>{{DBD}}</p>
+      <p style="font-family: 'Oxygen', sans-serif;">{{DBD}}</p>
     </div>
   </div>
 </div>

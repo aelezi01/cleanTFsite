@@ -16,6 +16,22 @@
     <p>{{boxplot}}</p>
     <h2 id="PCA" class="subheadings">Principal Component Analysis</h2>
     <p>{{PCA}}</p>
+
+
+    {% if PCAgraph == checked %}
+        <p>{{PCA}}</p>
+    {% endif %}
+
+    <table border="1">
+        {% for key,value in result.items() %}
+            <tr> 
+                {{key}}
+            </tr>
+            <tr>
+                {{value}}
+            </tr>
+        {% endfor %}
+    </table>
 </div>
 
 {% endblock %}

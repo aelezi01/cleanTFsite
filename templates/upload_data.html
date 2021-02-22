@@ -19,7 +19,7 @@
     </div>
       
     
-    <form action="#" method='POST'>
+    <form action="#" method='POST' enctype="multipart/form-data">
         <!--the user can upload their data file here-->
         <div>
             <section class="fontBody">
@@ -42,20 +42,17 @@
             </div>
           
             <div style="margin-left: 15%;" class="fontBody">
-                <div>                
-                    <label for=""><input type="checkbox" value="graph" name="PCA" checked>Principal Component Analysis (PCA)</label>
+                <div>              
+                    <input type="checkbox" id="PCA" value="graph" name="PCA" checked>  
+                    <label for="PCA">Principal Component Analysis (PCA)</label>
                 </div>
-                <div>                
-                    <label for=""><input type="checkbox" value="graph" name="HCA" checked>Hierarchical Clustering Analysis (HCA)</label>
+                <div>               
+                    <input type="checkbox" id="HCA" value="graph" name="HCA" checked> 
+                    <label for="HCA">Hierarchical Clustering Analysis (HCA)</label>
                 </div>
-                <div>                
-                    <label for=""><input type="checkbox" value="graph" name="heatmap" checked>Heatmap</label>
-                </div>
-                <div>                
-                    <label for=""><input type="checkbox" value="graph" name="DGE" checked>Differential gene expression</label><br>
-                </div>
-                <div>                
-                    <label for=""><input type="checkbox" value="graph" name="volcano" checked>Volcano plot</label>
+                <div>               
+                    <input type="checkbox" id="HM" value="graph" name="heatmap" checked> 
+                    <label for="HM">Heatmap</label>
                 </div>
                 <br><br>
             </div>
