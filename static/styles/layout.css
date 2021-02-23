@@ -1,5 +1,32 @@
 /* layout */
 
+@media only screen and (max-width: 500px) {
+    .labelToggle {
+        display: block;
+        cursor: pointer;
+        width: 26px;
+    }
+
+    .mainMenu {
+        text-align: center;
+        width: 100%;
+        display: none;
+    }
+    
+    .linksMainMenu {
+        display: block;
+        margin: 0;
+        border-radius: none;
+        padding: 0.5em;        
+        font-size: 0.8em;
+    }
+
+    #toggle:checked + .mainMenu {
+        display: block;
+        
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -37,25 +64,20 @@ body {
     background-color: whitesmoke;
     border: 1.4px solid black; 
     border-radius: 10em;
-    padding: 2em;
+    justify-content: space-between;
     box-shadow: 0px 0px 3px 0.1px gray;
-    flex-wrap: nowrap;
 }
 
-.mainMenuLi {
-    float: left;
-    background-color:  whitesmoke;
-    padding-top: 1em;
-}
 
 .a-homepage{
-    font-size: 2rem;
+    font-size: 2.2rem;
+    padding-left: 0.6em;
+    padding-right: 0.7em;
     text-decoration: none;
-    display: block;
     background-color: whitesmoke;
     color: black;
     float: left;
-    border-radius: 40px black;
+    font-family: 'PT Sans', sans-serif;
 }
 
 .a-homepage:hover {
@@ -67,20 +89,27 @@ body {
     color: black;
     padding: 1em;
     font-size: 1.5rem;
-    border-radius: 40px solid black;
     font-family: 'PT Sans', sans-serif;
+    clear: left;
+    line-height: 70px;
 }
 
 .linksMainMenu:hover {
     color: teal;
 }
 
-li.mainMenu a.linksMainMenu {
-    background-color: #e0f2f1;
-    padding: 8px 16px;
-  }
 
+.labelToggle {
+    margin: 0 40px 0 0;
+    font-size: 1em;
+    line-height: 70px;
+    display: none;
+    flex-direction: column;
+}
 
+#toggle {
+    display: none;
+}
 
 /* footer section */
 

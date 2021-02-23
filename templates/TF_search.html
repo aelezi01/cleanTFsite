@@ -16,6 +16,17 @@
 				{% endfor %}
 			{% endif %}
 		{% endwith %}
+
+
+		
+		{% if similar_results %}
+		<p>Did you mean one of these TFs instead?</p><br>
+			{% for x in similar_results %}
+				<a href="{{ url_for('TF', TF_name = x) }}">{{x}}</a>
+			{% endfor %}
+		{% endif %}
+	
+		
 	</div>
 
 	<div>

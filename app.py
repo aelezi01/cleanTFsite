@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import sqlite3 as sql
 import functions_for_samar
 import graphsFunctions
+from sqltools import TFsearch_functionalities
 
 # create a flask application object
 app_obj = Flask(__name__)
@@ -21,7 +22,7 @@ def home():
 @app_obj.route('/TF/', methods=['GET', 'POST'])
 def TF_search():
     if request.method == 'POST':
-        protein = request.form['TF_protein']
+        protein = request.form['TF_protein'].upper()
 
         # connect to the database
         con = sql.connect('tfdata.db')
@@ -37,7 +38,15 @@ def TF_search():
             # close the connection to the database
             c.close()
             con.close()
-            flash('The protein searched is not present in our database')
+            flash('The protein searched is not present in our database' + '\t')
+
+            similar_results = TFsearch_functionalities(protein)
+            if similar_results:
+                flash('Did you mean one of these TFs instead?' + '\t')
+                for item in similar_results:
+                    flash(item)
+                
+
             return render_template('TF_search.html')
     else:
         return render_template('TF_search.html')
