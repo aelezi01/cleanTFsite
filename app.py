@@ -40,14 +40,9 @@ def TF_search():
             con.close()
             flash('The protein searched is not present in our database' + '\t')
 
-            similar_results = TFsearch_functionalities(protein)
-            if similar_results:
-                flash('Did you mean one of these TFs instead?' + '\t')
-                for item in similar_results:
-                    flash(item)
-                
+            similar_results = TFsearch_functionalities(protein)                
 
-            return render_template('TF_search.html')
+            return render_template('TF_search.html', similar_results = similar_results)
     else:
         return render_template('TF_search.html')
 

@@ -20,11 +20,16 @@
 
 		
 		{% if similar_results %}
-		<p>Did you mean one of these TFs instead?</p><br>
-			{% for x in similar_results %}
-				<a href="{{ url_for('TF', TF_name = x) }}">{{x}}</a>
-			{% endfor %}
+			<div class="flashed">
+				<p>Did you mean one of these TFs instead?</p><br>
+				{% for x in similar_results %}
+					<a href="{{ url_for('TF', TF_name = x) }}" style="color: teal; text-align: justify;">{{x}}</a>
+				{% endfor %}
+			</div>
+			
 		{% endif %}
+	
+		
 	
 		
 	</div>
