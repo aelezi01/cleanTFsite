@@ -84,7 +84,7 @@ def drug_search_functionalities(search_term):
     # create the tuple, the connection and the cursor
     # this query will allow 0, 1 or multiple characters in front of and after the pattern seached for
     query = ('%'+search_term+'%',)
-    conn = sqlite3.connect("Database/tfdata.db")
+    conn = sqlite3.connect("tfdata.db")
     c = conn.cursor()
     # search for the query and return the genesymbols from transcriptionFactors
     c.execute("SELECT name FROM drugs WHERE name LIKE ?", query)

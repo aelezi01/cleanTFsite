@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import sqlite3 as sql
 import functions_for_samar
 import graphsFunctions
-from sqltools import TFsearch_functionalities
+from sqltools import TFsearch_functionalities, drug_search_functionalities
 
 # create a flask application object
 app_obj = Flask(__name__)
@@ -40,6 +40,7 @@ def TF_search():
             con.close()
             flash('The protein searched is not present in our database' + '\t')
 
+            # look for similar results
             similar_results = TFsearch_functionalities(protein)                
 
             return render_template('TF_search.html', similar_results = similar_results)
@@ -94,8 +95,12 @@ def drugs_search():
             # close the connection to the database
             c.close()
             con.close()
-            flash('The drug searched is not present in our database')
-            return render_template('drugs_search.html')
+            flash('The drug searched is not present in our database' + '\t')
+
+            # look for similar results
+            similar_results = drug_search_functionalities(drug) 
+
+            return render_template('drugs_search.html', similar_results = similar_results)
     else:
         return render_template('drugs_search.html')
 
