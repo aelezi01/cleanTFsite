@@ -3,10 +3,12 @@ import sqlite3 as sql
 import functions_for_samar
 import graphsFunctions
 from sqltools import TFsearch_functionalities, drug_search_functionalities
+from werkzeug import secure_filename
 
 # create a flask application object
 app_obj = Flask(__name__)
 app_obj.secret_key = 'GroupProject-bioinformatics21'
+app_obj.config['allowed_file_types'] = ['gds', 'soft', 'tsv', 'csv']
 
 
 # homepage page 
@@ -131,7 +133,7 @@ def drugs(drug_name):
         result2 = c.fetchall()
         result_list = [list(tuple) for tuple in result2]
 
-        return render_template('drugs.html', drug = drug_name, chemblID = chemblID, drugName = drugName, INCHIkey = INCHIkey)
+        return render_template('drugs.html', drug = drug_name, chemblID = chemblID, drugName = drugName, INCHIkey = INCHIkey, result_list = result_list)
 
 
 # upload data pages
@@ -139,13 +141,17 @@ def drugs(drug_name):
 ## this function checks if file is in allowed format
 def allowed_file(filename):
     """ returns True if file extension = gds or soft """
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ["gds","soft", "tsv", "csv"]
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ["gds","soft"]
 
 ## this page allows the user to upload the GEO dataset
 @app_obj.route('/upload_data/', methods=['GET', 'POST'])
 def upload_data():
     if request.method == 'POST':
-        new_file = request.form['file']
+
+        # this takes the file input and saves it 
+        new_file = request.files['file']
+        new_file.save(secure_filename(new_file.filename))
+
         if new_file is allowed_file == True:
             return redirect(url_for('stat_analysis', newdata = new_file))
         else:
