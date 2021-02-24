@@ -7,19 +7,20 @@
         <h1>{{drug}}</h1>
         <h2 id="chemblID" class="subheadings">Chembl ID</h2>
         <p>{{chemblID}}</p>
-        <h2 id="drugName" class="subheadings">Name</h2>
-        <p>{{drugName}}</p>
         <h3 id="INCHIkey" class="subheadings">INCHI key</h2>
         <p>{{INCHIkey}}</p>
         <br>
     </li>
 
+    <!--display chemical structure-->
+    <div>
+        <img src="{{drugStructure}}" alt="{{drug}} chemical structure">
+    </div>
 
     {% if result_list %}
         <div>
             <p>{{drug}} interacts with these transcriptor factor</p>
             <br>
-            <p>{{result_list}}</p>
 
             
             <table>

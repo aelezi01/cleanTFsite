@@ -4,7 +4,7 @@ def find_TF(TF_name):
     '''Looks for the transcription factor in the transcriptionFactors table
     and returns the name if it is in there. Else return string'''
     symbol = (TF_name,)
-    conn = sqlite3.connect("Database/tfdata.db")
+    conn = sqlite3.connect("tfdata.db")
     c = conn.cursor()
     c.execute("SELECT * FROM transcriptionFactors WHERE geneSymbol =?", symbol)
     result = c.fetchone()
@@ -23,7 +23,7 @@ def queryTF(TF_name, field):
     # create the tuple for safe querying
     tf = (TF_name,)
     # create the connection and the cursor
-    conn = sqlite3.connect("Database/tfdata.db")
+    conn = sqlite3.connect("tfdata.db")
     c = conn.cursor()
     # select the whole row, fetch it and close the connection again
     c.execute("SELECT * FROM transcriptionFactors WHERE geneSymbol=?", tf)
@@ -102,7 +102,7 @@ def drug_search_functionalities(search_term):
 ### temporary function exploring the syntax for querying multiple tables
 def get_joined_data(drug_name):
     '''queries connections between drugs and transcription factors '''
-    conn = sqlite3.connect('web design/tfdata.db')
+    conn = sqlite3.connect('tfdata.db')
     c = conn.cursor()
     symbol = (drug_name,)
     c.execute('SELECT * FROM drugs INNER JOIN drugsTF ON drugs.drugChemblID = drugsTF.drugChemblID WHERE name=?', symbol)
@@ -118,7 +118,7 @@ def get_TF_target_list(TFname):
     '''Function that will return all information on the target genes of a TF as a list of tuples.
     Probably not useful due to length of result'''
     symbol = (TFname, )
-    conn = sqlite3.connect('web design/tfdata.db')
+    conn = sqlite3.connect('tfdata.db')
     c = conn.cursor()
     c.execute("""SELECT geneSymbol, entrezID, geneName, pseudonyms, uniprotID
     FROM targetGenes INNER JOIN targetsTF
@@ -134,7 +134,7 @@ def get_TF_target_list(TFname):
 def get_drug_targets(drug_name):
     '''function that returns information on the TF targets of a drug'''
     symbol = (drug_name,)
-    conn = sqlite3.connect('web design/tfdata.db')
+    conn = sqlite3.connect('tfdata.db')
     c = conn.cursor()
     c.execute("""SELECT uniprotID, tfName, bindingSiteName, drugMechanism
     FROM drugsTF INNER JOIN drugs ON drugsTF.drugChemblID = drugs.drugChemblID
@@ -148,7 +148,7 @@ def get_drug_targets(drug_name):
 def get_TF_drug(TFname):
     '''function that returns a nested list of information on drugs that target query TF'''
     symbol = (TFname,)
-    conn = sqlite3.connect('web design/tfdata.db')
+    conn = sqlite3.connect('tfdata.db')
     c = conn.cursor()
     c.execute("""SELECT drugs.name, drugsTF.drugChemblID, drugsTF.bindingSiteName,
     drugsTF.drugMechanism FROM drugs

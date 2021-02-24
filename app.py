@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import sqlite3 as sql
 import functions_for_samar
 import graphsFunctions
-from sqltools import TFsearch_functionalities, drug_search_functionalities
+from sqltools import TFsearch_functionalities, drug_search_functionalities, get_pdb_url, get_structure_url
 
 # create a flask application object
 app_obj = Flask(__name__)
@@ -69,9 +69,13 @@ def TF(TF_name):
         uniprotID = result[5]
         DBD = result[6]
 
+        # create variable for displaying the chemical structure
+        tfStructure = get_pdb_url(pdbID)
+
+
         c.close()
         # return page with the information fetched from the database
-        return render_template('TF.html', TF_name = TF_name, ensemblID = ensemblID, entrezID = entrezID, pdbID = pdbID, uniprotID = uniprotID, DBD = DBD) 
+        return render_template('TF.html', TF_name = TF_name, ensemblID = ensemblID, entrezID = entrezID, pdbID = pdbID, uniprotID = uniprotID, DBD = DBD, tfStructure = tfStructure) 
 
 
 # drugs pages
@@ -119,20 +123,25 @@ def drugs(drug_name):
         result1 = c.fetchone()
 
         #set up variables with info from the various fields so that they can be called within the html file
-        chemblID = result1[1]
-        drugName = result1[2]
-        INCHIkey = result1[3]
+        chemblID = result1[0]
+        INCHIkey = result1[2]
 
         # gather information to display in the TF/drugs table
-        c.execute("""SELECT drugs.name, drugsTF.drugChemblID, drugsTF.bindingSiteName,
-        drugsTF.drugMechanism FROM drugs
-        INNER JOIN drugsTF ON drugs.drugChemblID = drugsTF.drugChemblID
-        INNER JOIN transcriptionFactors ON drugsTF.uniprotID = transcriptionFactors.uniprotID
-        WHERE transcriptionFactors.geneSymbol=?""", resultDrug)
+        # c.execute("""SELECT drugs.name, drugsTF.drugChemblID, drugsTF.bindingSiteName,
+        #drugsTF.drugMechanism FROM drugs
+        #INNER JOIN drugsTF ON drugs.drugChemblID = drugsTF.drugChemblID
+        #INNER JOIN transcriptionFactors ON drugsTF.uniprotID = transcriptionFactors.uniprotID
+        #WHERE transcriptionFactors.geneSymbol=?""", resultDrug)
+        
+        c.execute("SELECT drugsTF.bindingSiteName, drugsTF.drugMechanism FROM drugs INNER JOIN drugsTF ON drugs.drugChemblID = drugsTF.drugChemblID INNER JOIN transcriptionFactors ON drugsTF.uniprotID = transcriptionFactors.uniprotID WHERE name=?", resultDrug)
+
         result2 = c.fetchall()
         result_list = [list(tuple) for tuple in result2]
 
-        return render_template('drugs.html', drug = drug_name, chemblID = chemblID, drugName = drugName, INCHIkey = INCHIkey, result_list = result_list)
+        # create variable for displaying the chemical structure
+        drugStructure = get_structure_url(chemblID)
+
+        return render_template('drugs.html', drug = drug_name, chemblID = chemblID, INCHIkey = INCHIkey, result_list = result_list, drugStructure = drugStructure)
 
 
 # upload data pages
