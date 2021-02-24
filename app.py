@@ -7,7 +7,6 @@ from sqltools import TFsearch_functionalities, drug_search_functionalities, get_
 # create a flask application object
 app_obj = Flask(__name__)
 app_obj.secret_key = 'GroupProject-bioinformatics21'
-app_obj.config['allowed_file_types'] = ['gds', 'soft', 'tsv', 'csv']
 
 
 # homepage page 
@@ -159,8 +158,11 @@ def upload_data():
         # this takes the file input and saves it 
         new_file = request.files['fileGEO']
         new_file.save(new_file.filename)
+        
+        # check file
+        checkType = allowed_GEOfile(new_file)
 
-        if new_file is allowed_GEOfile == True:
+        if checkType == True:
             return redirect(url_for('stat_analysis', newdata = new_file))
         else:
             flash('The file uploaded is not compatible with our analysis tools.' + '\t' + 'Please upload a gds or soft file instead.')
@@ -174,7 +176,6 @@ def stat_analysis(newdata):
     new_file = request.files['fileGEO']
 
     PCAgraph = request.form['PCA']
-    HCAgraph = request.form.ge
 
 
     gds = GDSinput(newdata)
@@ -183,7 +184,7 @@ def stat_analysis(newdata):
     boxplot = gene_boxplot(gds)
     PCA = pca_plot(gds)
     
-    return render_template('stat_analysis.html')
+    return render_template('stat_analysis.html', gds = gds, metadata = metadata, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCA)
 #    return 'you will be able to upload data for %s soon' % newdata_name
 
 
