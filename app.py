@@ -3,7 +3,6 @@ import sqlite3 as sql
 import functions_for_samar
 import graphsFunctions
 from sqltools import TFsearch_functionalities, drug_search_functionalities
-from werkzeug import secure_filename
 
 # create a flask application object
 app_obj = Flask(__name__)
@@ -139,7 +138,7 @@ def drugs(drug_name):
 # upload data pages
 
 ## this function checks if file is in allowed format
-def allowed_file(filename):
+def allowed_GEOfile(filename):
     """ returns True if file extension = gds or soft """
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ["gds","soft"]
 
@@ -149,13 +148,13 @@ def upload_data():
     if request.method == 'POST':
 
         # this takes the file input and saves it 
-        new_file = request.files['file']
-        new_file.save(secure_filename(new_file.filename))
+        new_file = request.files['fileGEO']
+        new_file.save(new_file.filename)
 
-        if new_file is allowed_file == True:
+        if new_file is allowed_GEOfile == True:
             return redirect(url_for('stat_analysis', newdata = new_file))
         else:
-            flash('The file uploaded is not compatible with our analysis tools.' + '\t' + 'Please upload a gds, soft, tsv or csv file instead.')
+            flash('The file uploaded is not compatible with our analysis tools.' + '\t' + 'Please upload a gds or soft file instead.')
             return render_template('upload_data.html')
     else:
         return render_template('upload_data.html')
@@ -163,7 +162,7 @@ def upload_data():
 ## this page allows the user to access statistical analysis of their dataset
 @app_obj.route('/upload_data/<newdata>/')
 def stat_analysis(newdata):
-    new_file = request.form['file']
+    new_file = request.files['fileGEO']
 
     PCAgraph = request.form['PCA']
     HCAgraph = request.form.ge

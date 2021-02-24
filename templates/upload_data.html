@@ -4,7 +4,7 @@
 
 <div class="contentMargin">
     <div style="text-align: center;">
-        <h2 style="color: black;">Upload your GEO dataset</h2>
+        <h2 style="color: black;">GEO dataset analysis</h2>
     </div>
     
     <div>
@@ -20,25 +20,24 @@
       
     
     <form action="#" method='post' enctype="multipart/form-data">
-        <!--the user can upload their data file here-->
         <div>
-            <section class="fontBody">
-                <div>
-                <label for="file_name">Name of the dataset:</label><br>
-                <input type="text" id="file_name" name="file_name" style="border: 1px solid black;"><br>
-                </div><br>
-                <div>
+            <div>
+                <p>You can upload here your GEO dataset data and receive a basic statistical analysis.</p>
                 <br>
-                <label for="file" >Upload here:</label>
-                <input type="file" id="file" name="file" value="Select file" style="background-color: whitesmoke; color: black;" required><br>
-                </div>
-            </section>
+                <p>Additional graphs and analysis can be selected using the form below.</p>
+            </div>
+            <!--the user can upload their GDS/soft data file here-->
+            <div class="fontBody">                
+                <br>
+                <label for="fileGEO" >Upload here:</label>
+                <input type="file" id="fileGEO" name="fileGEO" value="Select file" style="background-color: whitesmoke; color: black;" required>
+                <br>                
+            </div>
           
-            <!--Here the user can select the graphs and data analysis they need-->
+            <!--Here the user can select the additional graphs and data analysis they need from the GEO dataset-->
             <div>
                 <br>
-                <p>A basic statistical analysis will display. <br>
-                    Please select any additional statistical analysis and graphs required.</p>
+                <p>Select here your optional analysis:</p>
             </div>
           
             <div style="margin-left: 15%;" class="fontBody">
@@ -54,10 +53,53 @@
                     <input type="checkbox" id="HM" value="graph" name="heatmap" checked> 
                     <label for="HM">Heatmap</label>
                 </div>
+                <div>               
+                    <input type="checkbox" id="TFO" value="graph" name="TFO" checked> 
+                    <label for="TFO">List of Transcription Factors only</label>
+                </div>
+                <div>               
+                    <input type="checkbox" id="TFT" value="graph" name="TFT" checked> 
+                    <label for="TFT">List of Transcription Factors and Targets</label>
+                </div>
+                <div>               
+                    <input type="checkbox" id="GSEA" value="graph" name="GSEA" checked> 
+                    <label for="GSEA">Gene Set Enrichment Analysis (GSEA)</label>
+                </div>
                 <br><br>
             </div>
                 <input value="Upload" type="submit" style="margin-left: 20px; color: black; background-color: white; border: 1px solid black;">
-                <input type="reset" value="Reset form" style="margin-left: 20px; color: black; background-color: white; border: 1px solid black;">
+            <br><br>
+        </div>
+
+
+        <div>
+            <div>
+                <p>For more information about the differential gene expression of your dataset, please upload here your tsv/csv file with the pre-ranked gene list:</p>
+                <br>
+            </div>
+
+            <!--the user can upload their tsv/csv data file here-->
+            <div>
+                <br>
+                <input type="file" id="fileTSV" name="fileTSV" value="Select file" style="background-color: whitesmoke; color: black;">
+                <br> 
+            </div>
+
+            <div>               
+                <input type="checkbox" id="GEtf" value="graph" name="GEtf" checked> 
+                <label for="GEtf">GE Transcription Factors only</label>
+            </div>
+            <div>               
+                <input type="checkbox" id="GEtargets" value="graph" name="GEtargets" checked> 
+                <label for="GEtargets">GE Targets only</label>
+            </div>
+            <div>               
+                <input type="checkbox" id="GETFT" value="graph" name="GETFT" checked> 
+                <label for="GETFT">GE Transcription Factors and Targets</label>
+            </div>
+
+            <input value="Upload" type="submit" style="margin-left: 20px; color: black; background-color: white; border: 1px solid black;">
+            <input type="reset" value="Reset form" style="margin-left: 20px; color: black; background-color: white; border: 1px solid black;">
             <br><br>
         </div>
     </form>
