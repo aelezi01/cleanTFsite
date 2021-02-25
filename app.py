@@ -69,7 +69,10 @@ def TF(TF_name):
         DBD = result[6]
 
         # create variable for displaying the chemical structure
-        tfStructure = get_pdb_url(pdbID)
+        if pdbID:
+            tfStructure = get_pdb_url(pdbID)
+        else:
+            tfStructure = 'No protein structure is available for this transcription factor yet'
 
 
         c.close()
@@ -118,7 +121,7 @@ def drugs(drug_name):
 
         # select the whole row and fetch it
         resultDrug = (drug_name,)
-        c.execute("SELECT * FROM drugs INNER JOIN drugsTF ON drugs.drugChemblID = drugsTF.drugChemblID WHERE name=?", resultDrug)
+        c.execute("SELECT * FROM drugs WHERE name=?", resultDrug)
         result1 = c.fetchone()
 
         #set up variables with info from the various fields so that they can be called within the html file
@@ -126,21 +129,22 @@ def drugs(drug_name):
         INCHIkey = result1[2]
 
         # gather information to display in the TF/drugs table
-        # c.execute("""SELECT drugs.name, drugsTF.drugChemblID, drugsTF.bindingSiteName,
-        #drugsTF.drugMechanism FROM drugs
-        #INNER JOIN drugsTF ON drugs.drugChemblID = drugsTF.drugChemblID
-        #INNER JOIN transcriptionFactors ON drugsTF.uniprotID = transcriptionFactors.uniprotID
-        #WHERE transcriptionFactors.geneSymbol=?""", resultDrug)
         
-        c.execute("SELECT drugsTF.bindingSiteName, drugsTF.drugMechanism FROM drugs INNER JOIN drugsTF ON drugs.drugChemblID = drugsTF.drugChemblID INNER JOIN transcriptionFactors ON drugsTF.uniprotID = transcriptionFactors.uniprotID WHERE name=?", resultDrug)
+        c.execute("SELECT transcriptionFactors.geneSymbol, drugsTF.bindingSiteName, drugsTF.drugMechanism FROM drugs INNER JOIN drugsTF ON drugs.drugChemblID = drugsTF.drugChemblID INNER JOIN transcriptionFactors ON drugsTF.uniprotID = transcriptionFactors.uniprotID WHERE drugs.name=?", resultDrug)
 
         result2 = c.fetchall()
         result_list = [list(tuple) for tuple in result2]
 
+        loop_list = []
+        for lst in result_list:
+            split_field = lst[1].split(',')
+            result_list2 = [lst[0], split_field[0], split_field[1], lst[2]]
+            loop_list.append(result_list2)
+
         # create variable for displaying the chemical structure
         drugStructure = get_structure_url(chemblID)
 
-        return render_template('drugs.html', drug = drug_name, chemblID = chemblID, INCHIkey = INCHIkey, result_list = result_list, drugStructure = drugStructure)
+        return render_template('drugs.html', drug = drug_name, chemblID = chemblID, INCHIkey = INCHIkey, result_list = result_list, loop_list = loop_list, drugStructure = drugStructure)
 
 
 # upload data pages
@@ -157,7 +161,7 @@ def upload_data():
 
         # this takes the file input and saves it 
         new_file = request.files['fileGEO']
-        new_file.save(new_file.filename)
+        new_file.save(new_file)
         
         # check file
         checkType = allowed_GEOfile(new_file)

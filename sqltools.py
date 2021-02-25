@@ -166,6 +166,8 @@ def get_TF_drug(TFname):
 ##### Just some other functions for copy and paste
 def get_pdb_url(pdbID):
     '''function that returns the url for an image from a pdb ID'''
+    if len(pdbID) > 4: 
+        pdbID = pdbID.split(';')[0]
     pdbid = pdbID.lower()
     dbi = pdbid[1:3]
     url = "https://cdn.rcsb.org/images/structures/" + dbi + "/" + pdbid + "/" + pdbid + "_assembly-1.jpeg"

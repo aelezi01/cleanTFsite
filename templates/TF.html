@@ -35,9 +35,12 @@
     </div>
 
     <!--display chemical structure-->
-    <div>
-      <img src="{{tfStructure}}" alt="{{TF_name}} chemical structure">
-    </div>
+    {% if pdbID %}
+      <div>
+        <img src="{{tfStructure}}" alt="{{TF_name}} chemical structure">
+      </div>
+    {% endif %}
+
   </div>
 </div>
 

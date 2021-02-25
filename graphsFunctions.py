@@ -160,6 +160,37 @@ def pca_plot(gds):
 
 # In[ ]:
 
+def hca(gds):
 
+    """This function takes a gds object as input and
+    outputs a a heatmap/dendrogram which allows the user to have a first
+    general overview of the data"""
+  
+    df = gds.table
+    df = df.set_index('IDENTIFIER')
+    df.drop(columns=['ID_REF'], axis=1, inplace = True)
+    df = df.dropna() #if there are any
+
+    disease_state = pd.Series(gds.columns.iloc[:, 2])
+    df.columns = disease_state
+
+    df2 = df[~df.index.duplicated(keep="first")] #find the mean     
+
+    #transposing
+
+    df2_trans = df2.T 
+    std_genes = df2_trans.std()
+
+    
+    #sorting highest to lowest
+
+    std_genes = std_genes.sort_values(ascending=False)
+    std_100genes = pd.DataFrame(std_genes[0:100])
+    df100 = df2.loc[std_100genes.index]
+
+    heatmap_dendo = sns.clustermap(df100, cmap="coolwarm", figsize=(17,17))
+
+
+    return heatmap_dendo
 
 

@@ -19,23 +19,29 @@
 
     {% if result_list %}
         <div>
-            <p>{{drug}} interacts with these transcriptor factor</p>
+            <p>{{drug}} interacts with these transcriptor factors:</p>
             <br>
 
             
             <table>
                 <tr>
+                    <th>Gene Symbol</th>
                     <th>TF name</th>
                     <th>Binding site</th>
                     <th>Drug mechanism</th>
                 </tr>
-                {% for x in result_list %}
+                {% for x in loop_list %}
                     <tr>
-                        <td>{{x}}</td>
+                        {% for i in x %}
+                            <td>{{i}}</td>
+                        {% endfor%}
                     </tr>                
                 {% endfor %}
             </table>
         </div>
+
+    {% else %}
+        <p>There are no specific TFs known to interact with this drug.</p>
     {% endif %}
     
     
