@@ -17,13 +17,12 @@
       </ul>
     </div>
 
-
+    <div class="headings">{{TF_name}}</div>
 
     <!--this section codes for the paragraphs with the information pulled from the SQL database-->
     <div style="margin-left: 2%; flex: 3;">
-      <h1 id="geneSymbol" style="font-family: 'Oxygen', sans-serif;;">{{TF_name}}</h1>
-      <h2 id="ensemblID" style="font-family: 'PT Sans', sans-serif;">Ensembl ID</h2>
-      <p style="font-family: 'Oxygen', sans-serif;">{{ensemblID}}</p>
+      <h2 id="ensemblID" class="subheadings">Ensembl ID</h2>
+      <p>{{ensemblID}}</p>
       <h2 id="entrezID" class="subheadings">Entrez ID</h2>
       <p>{{entrezID}}</p>
       <h2 id="pdbID" class="subheadings">Pdb ID</h2>
@@ -31,7 +30,7 @@
       <h2 id="uniprotID" class="subheadings">Uniprot ID</h2>
       <p>{{uniprotID}}</p>
       <h2 id="DBD" class="subheadings">DBD</h2>
-      <p style="font-family: 'Oxygen', sans-serif;">{{DBD}}</p>
+      <p>{{DBD}}</p>
     </div>
 
     <!--display chemical structure-->

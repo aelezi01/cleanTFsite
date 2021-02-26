@@ -57,6 +57,10 @@ body {
     font-family: 'Oxygen', sans-serif;
 }
 
+label {
+    font-family: 'PT Sans', sans-serif;
+}
+
 /* main menu */
 
 .mainMenu {
@@ -152,6 +156,18 @@ footer {
     box-shadow: 0px 0px 3px 0.1px gray;
 }
 
+.homeHeadings{
+    text-align: center;
+    font-size: 1.4em;
+    font-family: 'PT Sans', sans-serif;
+}
+
+.homeSubheadings {
+    text-align: center;
+    font-size: 0.9em;
+    font-family: 'Oxygen', sans-serif;
+}
+
 /* multiple pages */
 
 .contentMargin {
@@ -167,6 +183,24 @@ footer {
     padding: 20px;
     margin: 40px;
     box-shadow: 0px 0px 3px 0.1px gray;
+    font-family: 'Oxygen', sans-serif;
+}
+
+.styleBoxes {
+    text-align: center;
+}
+
+.headings {
+    text-align: center;
+    font-weight: bold;
+    font-family: 'PT Sans', sans-serif;
+}
+.subheadings {
+    font-family: 'PT Sans', sans-serif;    
+}
+
+p {
+    font-family: 'Oxygen', sans-serif;
 }
 
 
@@ -186,6 +220,7 @@ footer {
     display: inline-block;
     text-decoration: none;
     color: black;
+    font-family: 'Oxygen', sans-serif;
 }
 
 /* tables */
@@ -204,8 +239,8 @@ footer {
     background-color: #5f9ea0;
     color: white;
     font-weight: bold;
-    
     text-shadow: 1px 1px 2px #000000;
+    font-family: 'PT Sans', sans-serif;
 }
 
 .table th, td {
@@ -214,6 +249,7 @@ footer {
 
 .table tbody tr {
     border-bottom: 1px solid lightslategray;
+    font-family: 'Oxygen', sans-serif;
 }
 
 .table tbody tr:hover {
