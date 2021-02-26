@@ -14,7 +14,7 @@
 
     <!--display chemical structure-->
     <div>
-        <img src="{{drugStructure}}" alt="{{drug}} chemical structure">
+        <img src="{{drugStructure}}" alt="{{drug}} chemical structure" style="box-shadow: 0px 0px 3px 0.1px gray;">
     </div>
 
     {% if result_list %}
@@ -23,19 +23,19 @@
             <br>
 
             
-            <table>
-                <tr>
+            <table class="table">
+                <thead class="fontHeaders">
                     <th>Gene Symbol</th>
                     <th>TF name</th>
                     <th>Binding site</th>
                     <th>Drug mechanism</th>
-                </tr>
+                </thead>
                 {% for x in loop_list %}
-                    <tr>
+                    <tbody class="fontBody">
                         {% for i in x %}
                             <td>{{i}}</td>
                         {% endfor%}
-                    </tr>                
+                    </tbody>                
                 {% endfor %}
             </table>
         </div>

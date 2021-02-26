@@ -61,6 +61,7 @@ body {
 
 .mainMenu {
     color: whitesmoke;
+    text-decoration: solid;
     background-color: whitesmoke;
     border: 1.4px solid black; 
     border-radius: 10em;
@@ -168,6 +169,7 @@ footer {
     box-shadow: 0px 0px 3px 0.1px gray;
 }
 
+
 /* side menu */
 
 .sideBar {
@@ -189,12 +191,31 @@ footer {
 /* tables */
 
 .table {
-    border: 1px solid black;
     border-collapse: collapse;
-    width: 30%;
+    margin: 25px 0;
+    font: 0.9em;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0px 0px 3px 0.1px gray;
+    border-bottom: 2px solid black;
 }
 
-th, td {
-    text-align: center;
-    color: black;
+.table thead tr {
+    background-color: #5f9ea0;
+    color: white;
+    font-weight: bold;
+    
+    text-shadow: 1px 1px 2px #000000;
+}
+
+.table th, td {
+    padding: 12px 15px;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid lightslategray;
+}
+
+.table tbody tr:hover {
+    background-color: #f0f0f0;
 }
