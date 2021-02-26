@@ -21,15 +21,15 @@
     
     <form action="#" method='post' enctype="multipart/form-data">
         <div>
-            <div>
+            <div class="text1">
                 <p>You can upload here your GEO dataset data and receive a basic statistical analysis.</p>
                 <br>
                 <p>Additional graphs and analysis can be selected using the form below.</p>
             </div>
             <!--the user can upload their GDS/soft data file here-->
-            <div class="fontBody">                
+            <div class="uploadButton">                
                 <br>
-                <label for="fileGEO" >Upload here:</label>
+                <label for="fileGEO" style="font-family: 'Oxygen', sans-serif;">Upload here:</label>
                 <input type="file" id="fileGEO" name="fileGEO" value="Select file" style="background-color: whitesmoke; color: black;" required>
                 <br>                
             </div>
@@ -85,22 +85,26 @@
                 <br> 
             </div>
 
-            <div>               
-                <input type="checkbox" id="GEtf" value="graph" name="GEtf" checked> 
-                <label for="GEtf">GE Transcription Factors only</label>
+            <div class="options2">
+                <div>               
+                    <input type="checkbox" id="GEtf" value="graph" name="GEtf" checked> 
+                    <label for="GEtf">GE Transcription Factors only</label>
+                </div>
+                <div>               
+                    <input type="checkbox" id="GEtargets" value="graph" name="GEtargets" checked> 
+                    <label for="GEtargets">GE Targets only</label>
+                </div>
+                <div>               
+                    <input type="checkbox" id="GETFT" value="graph" name="GETFT" checked> 
+                    <label for="GETFT">GE Transcription Factors and Targets</label>
+                </div>
             </div>
-            <div>               
-                <input type="checkbox" id="GEtargets" value="graph" name="GEtargets" checked> 
-                <label for="GEtargets">GE Targets only</label>
-            </div>
-            <div>               
-                <input type="checkbox" id="GETFT" value="graph" name="GETFT" checked> 
-                <label for="GETFT">GE Transcription Factors and Targets</label>
-            </div>
-
-            <input value="Upload" type="submit" style="margin-left: 20px; color: black; background-color: white; border: 1px solid black;">
+            
+            
+            <input value="Upload" type="submit" class="button1">
             <input type="reset" value="Reset form" class="button1">
             <br><br>
+
         </div>
     </form>
 </div>

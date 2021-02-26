@@ -3,10 +3,16 @@ import sqlite3 as sql
 import functions_for_samar
 import graphsFunctions
 from sqltools import TFsearch_functionalities, drug_search_functionalities, get_pdb_url, get_structure_url
+from werkzeug.utils import secure_filename
+import os
 
 # create a flask application object
 app_obj = Flask(__name__)
 app_obj.secret_key = 'GroupProject-bioinformatics21'
+
+# configure app for the file upload
+app_obj.config['ALLOWED_GDS_FILES'] = ['SOFT', 'GDS']
+app_obj.config['SAVE_FILE_LOCATION'] = '/cleanTFsite/'
 
 
 # homepage page 
@@ -151,28 +157,46 @@ def drugs(drug_name):
 
 ## this function checks if file is in allowed format
 def allowed_GEOfile(filename):
-    """ returns True if file extension = gds or soft """
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ["gds","soft"]
+
+    
+    if not '.' in filename:
+        return False
+
+    # this splits the filename from its extension
+    ext = filename.rsplit('.', 1)[1]
+    
+    # the if loop checks if the file is in the correct format
+    if ext.upper() in app.config['ALLOWED_GDS_FILES']:
+        return True
+    else:
+        return False
+
 
 ## this page allows the user to upload the GEO dataset
 @app_obj.route('/upload_data/', methods=['GET', 'POST'])
 def upload_data():
     if request.method == 'POST':
 
-        # this takes the file input and saves it 
+        # this takes the file input from the HTML file 
         new_file = request.files['fileGEO']
-        new_file.save(new_file)
         
         # check file
-        checkType = allowed_GEOfile(new_file)
+        if file and allowed_GEOfile(new_file.filename):
+            # this returns a secure name for the file
+            secureGDSfile = secure_filename(new_file.filename)
 
-        if checkType == True:
+            # this saves the file
+            new_file.save(new_file.secure_filename)
+            new_file.save(os.path.join(app_obj.config['SAVE_FILE_LOCATION'].filename))
+
             return redirect(url_for('stat_analysis', newdata = new_file))
         else:
             flash('The file uploaded is not compatible with our analysis tools.' + '\t' + 'Please upload a gds or soft file instead.')
             return render_template('upload_data.html')
     else:
         return render_template('upload_data.html')
+
+
 
 ## this page allows the user to access statistical analysis of their dataset
 @app_obj.route('/upload_data/<newdata>/')
