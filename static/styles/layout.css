@@ -33,6 +33,19 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: 19px;
+}
+
+@media (max-width: 900px) {
+    html { font-size: 15px; }
+}
+
+@media (max-width: 400px){
+    html { font-size: 13px; }
+}
+
+
 /* background */
 
 body {
@@ -70,6 +83,7 @@ label {
     border: 1.4px solid black; 
     border-radius: 10em;
     justify-content: space-between;
+    padding: 1rem;
     box-shadow: 0px 0px 3px 0.1px gray;
 }
 
@@ -93,10 +107,9 @@ label {
     text-decoration: none;
     color: black;
     padding: 1em;
-    font-size: 1.5rem;
+    font-size: 1.2eqm;
     font-family: 'PT Sans', sans-serif;
     clear: left;
-    line-height: 70px;
 }
 
 .linksMainMenu:hover {
@@ -120,6 +133,7 @@ label {
 
 footer {
     padding: 1.5em;
+    font-size: 0.75rem;
     background-color:  black;
     color: white;
     text-align: center;
@@ -168,6 +182,15 @@ footer {
     font-family: 'Oxygen', sans-serif;
 }
 
+/* upload page */
+
+.button1 {
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    padding: 0.5rem;    
+}
+
 /* multiple pages */
 
 .contentMargin {
@@ -194,6 +217,7 @@ footer {
     text-align: center;
     font-weight: bold;
     font-family: 'PT Sans', sans-serif;
+    padding: 1.5rem;
 }
 .subheadings {
     font-family: 'PT Sans', sans-serif;    
@@ -208,6 +232,7 @@ p {
 
 .sideBar {
     flex: 1;
+    font-size: 0.85rem;
     position: sticky;
     padding: 0.5%;
     width: 90%;
