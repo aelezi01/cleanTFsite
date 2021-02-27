@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import sqlite3 as sql
 import functions_for_samar
-import graphsFunctions
+from graphsFunctions import GDSinput, get_description, get_sum, gene_boxplot, pca_plot, hca
 from sqltools import TFsearch_functionalities, drug_search_functionalities, get_pdb_url, get_structure_url
 from werkzeug.utils import secure_filename
 import os
@@ -12,7 +12,7 @@ app_obj.secret_key = 'GroupProject-bioinformatics21'
 
 # configure app for the file upload
 app_obj.config['ALLOWED_GDS_FILES'] = ['SOFT', 'GDS']
-app_obj.config['SAVE_FILE_LOCATION'] = '/cleanTFsite/'
+app_obj.config['SAVE_FILE_LOCATION'] = 'C:/Users/areda/Desktop/Group project/CleanTFsite/TFproject/cleanTFsite/' 
 
 
 # homepage page 
@@ -166,7 +166,7 @@ def allowed_GEOfile(filename):
     ext = filename.rsplit('.', 1)[1]
     
     # the if loop checks if the file is in the correct format
-    if ext.upper() in app.config['ALLOWED_GDS_FILES']:
+    if ext.upper() in app_obj.config['ALLOWED_GDS_FILES']:
         return True
     else:
         return False
@@ -181,15 +181,14 @@ def upload_data():
         new_file = request.files['fileGEO']
         
         # check file
-        if file and allowed_GEOfile(new_file.filename):
+        if allowed_GEOfile(new_file.filename):
             # this returns a secure name for the file
-            secureGDSfile = secure_filename(new_file.filename)
+            secureGDSfilename = secure_filename(new_file.filename)
 
             # this saves the file
-            new_file.save(new_file.secure_filename)
-            new_file.save(os.path.join(app_obj.config['SAVE_FILE_LOCATION'].filename))
+            new_file.save(os.path.join(app_obj.config['SAVE_FILE_LOCATION'], secureGDSfilename))
 
-            return redirect(url_for('stat_analysis', newdata = new_file))
+            return redirect(url_for('stat_analysis', newdata = secureGDSfilename))
         else:
             flash('The file uploaded is not compatible with our analysis tools.' + '\t' + 'Please upload a gds or soft file instead.')
             return render_template('upload_data.html')
@@ -201,10 +200,6 @@ def upload_data():
 ## this page allows the user to access statistical analysis of their dataset
 @app_obj.route('/upload_data/<newdata>/')
 def stat_analysis(newdata):
-    new_file = request.files['fileGEO']
-
-    PCAgraph = request.form['PCA']
-
 
     gds = GDSinput(newdata)
     metadata = get_description(gds)

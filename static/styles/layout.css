@@ -140,7 +140,6 @@ footer {
     display: -ms-inline-flexbox;
     border: 1.3px solid black;
     border-radius: 40px;
-    bottom: 0%;
     position: static;
     box-shadow: 0px 0px 3px 0.1px gray;
 }
@@ -198,7 +197,16 @@ footer {
     color: black;
     background-color: white;
     border: 1px solid black;
-    padding: 0.5rem;    
+    padding: 0.5rem;   
+    padding-left: 1rem;
+    padding-right: 1rem; 
+    margin: 0.5rem;
+    font-size: medium;
+}
+
+.button1:hover {
+    background-color: black;
+    color: white;
 }
 
 .options2 {

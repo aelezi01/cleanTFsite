@@ -9,10 +9,10 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/layout.css') }}">
 
 
-        <title> TFs&co.</title>
+        <title> TREX-DB</title>
         <!--Header section of the page-->
         <header style="margin-bottom:0">
-            <h1 style="text-align: center;  font-size: 1.5rem">Transcription Factors & co.</h1> 
+            <h1 style="text-align: center;  font-size: 1.5rem"><a href="{{ url_for('home') }}" style="text-decoration: none; color: black;">Transcriptional Regulation Explorer DataBase</a></h1> 
             <br>
         </header>
          
@@ -21,7 +21,7 @@
             <label for="toggle" class="labelToggle">&#9776;</label>
             <input type="checkbox" id="toggle"/>
             <div class="mainMenu">
-                <a href="{{ url_for('home') }}" class="linksMainMenu">TFs&co.</a>
+                <a href="{{ url_for('home') }}" class="linksMainMenu">TREX-DB</a>
                 <a href="{{ url_for('TF_search') }}" class="linksMainMenu">Transcription Factors</a>
                 <a href="{{ url_for('drugs_search') }}" class="linksMainMenu">Drugs</a>
                 <a href="{{ url_for('upload_data') }}" class="linksMainMenu">Upload Data</a>
