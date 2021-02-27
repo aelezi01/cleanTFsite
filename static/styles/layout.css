@@ -87,27 +87,11 @@ label {
     box-shadow: 0px 0px 3px 0.1px gray;
 }
 
-
-.a-homepage{
-    font-size: 2.2rem;
-    padding-left: 0.6em;
-    padding-right: 0.7em;
-    text-decoration: none;
-    background-color: whitesmoke;
-    color: black;
-    float: left;
-    font-family: 'PT Sans', sans-serif;
-}
-
-.a-homepage:hover {
-    color: teal;
-}
-
 .linksMainMenu {
     text-decoration: none;
     color: black;
     padding: 1em;
-    font-size: 1.2eqm;
+    font-size: 1.2em;
     font-family: 'PT Sans', sans-serif;
     clear: left;
 }
@@ -140,7 +124,7 @@ footer {
     display: -ms-inline-flexbox;
     border: 1.3px solid black;
     border-radius: 40px;
-    position: static;
+    position: sticky;
     box-shadow: 0px 0px 3px 0.1px gray;
 }
 
@@ -187,12 +171,6 @@ footer {
     padding: 1.5rem;
 }
 
-.uploadButton {
-    text-align: right;
-    padding: 1.5rem;
-    margin-right: 4rem;
-}
-
 .button1 {
     color: black;
     background-color: white;
@@ -210,7 +188,7 @@ footer {
 }
 
 .options2 {
-    text-indent: 50%;
+    text-indent: 51.5%;
 
 }
 

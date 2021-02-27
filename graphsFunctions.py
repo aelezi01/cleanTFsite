@@ -1,10 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
 # # Packages
-
-# In[12]:
-
 
 import GEOparse
 import pandas as pd
@@ -12,12 +6,12 @@ from matplotlib import pyplot as plt
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn import preprocessing
+import base64
+from io import BytesIO
+from matplotlib.figure import Figure
 
 
 # # Import GDS file
-
-# In[13]:
-
 
 def GDSinput(file):
     """Function that takes a GDS file as an input and returns a gds object with 3 
@@ -30,17 +24,12 @@ def GDSinput(file):
 
 # # Summary table and boxplot
 
-# In[15]:
-
-
 def get_description(gds):
     """Function that takes gds object as input and outputs metadata related to the GDS file"""
     
     description = gds.metadata
     return description  ########change this to a nice table ##########
 
-
-# In[17]:
 
 
 def get_sum(gds):
@@ -54,27 +43,30 @@ def get_sum(gds):
     return sumTable
 
 
-# In[21]:
-
-
 def gene_boxplot(gds):
+
     """Function that takes a gds object as input and outputs a boxplot 
-        of gene expression data for each of the samples in the dataset."""
-    
+        of gene expression data for each of the samples in the dataset."""   
+
     #preparing data and convert DF to a  2D numpy array
+
     data2 = gds.table
     data2 = pd.DataFrame(data2[data2.columns[2::]])
-    data2 = data2.dropna() #DROP NaN????
+    data2 = data2.dropna()
     disease_state = pd.Series(gds.columns.iloc[:, 2])
     data2.columns = disease_state
     npArray = data2.to_numpy()
-    
+  
+
     #colours and colour vector
+
     colors = ["blue","darkorange","red","green","darkorange","dodgerblue","yellow","deeppink","royalblue","aqua","palegreen","coral"]
     emptyDict = {label:col for col,label in zip(colors,np.unique(data2.columns))}
     colourVector = [emptyDict[label] for label in data2.columns]
-    
-    fig1, ax1 = plt.subplots(figsize=(20,10))
+
+
+    fig = Figure(figsize = (10,5))
+    ax1 = fig.subplots()
     ax1.set_title("Distribution of Gene Expression Across All Samples",fontsize=20,weight='bold' )
     ax1.set_xlabel("Samples",fontsize=20,weight='bold')
     ax1.set_ylabel("Gene Expression Level",fontsize=20,weight='bold')
@@ -83,114 +75,112 @@ def gene_boxplot(gds):
 
     for patch, color in zip(box['boxes'], colourVector):
         patch.set_facecolor(color)
-    
-    plt.savefig('static/boxplot.png')
-    
-    
-    return True
+
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+
+    # Embed the result in the html output.
+    data = base64.b64encode(buf.getbuffer()).decode("ascii")
+    img = f"data:image/png;base64,{data}"
+    return img
 
 
 # # PCA
 
-# In[24]:
+# def pca_plot(gds):
+    
+#     """Function that takes a gds object as input and
+#     outputs a PCA plot"""
+    
+#     df_pca = gds.table
+#     df_pca = df_pca.drop("ID_REF", axis=1)
+#     df_pca = df_pca.set_index("IDENTIFIER")
+    
+#     #changing column names to disease state
+#     disease_state = pd.Series(gds.columns.iloc[:, 2])
+#     df_pca.columns = disease_state
+#     df_pca = df_pca.dropna() #DROP NaN????
+    
+#     #center, scale and transform
+#     #scale function expects samples to be rows
+#     scaled_df = preprocessing.scale(df_pca.T)
+    
+#     #create pca object
+#     pca = PCA()
+    
+#     #call fitt method to calculate loading scores
+#     pca.fit(scaled_df)
+    
+#     #generate coordenates for PCA graph based on loading scores and scaled data
+#     pca_data = pca.transform(scaled_df)
+    
+#     #calculate % of variation that each PC accounts for
+#     per_var = np.round(pca.explained_variance_ratio_*100, decimals=1)
+    
+#     #create labels for Scree Plot. One label per PC
+#     labels = ["PC" + str(x) for x in range(1, len(per_var)+1)]
+    
+#     #Put new coordinates, created by pca.transform into a matrix
+#     pca_df = pd.DataFrame(pca_data, index = labels, columns=labels)
+    
+#     ######not sure if this is correct ########
+#     # Label to color dict (automatic)
+#     label_color_dict = {label:idx for idx,label in enumerate(np.unique(df_pca.columns))}
+#     # Color vector creation
+#     cvec = [label_color_dict[label] for label in df_pca.columns]
+    
+#     #plotting
+#     plt.figure(figsize=(10, 6), dpi=100)
+#     xxx = plt.scatter(pca_df.PC1, pca_df.PC2, c=cvec)
 
-
-def pca_plot(gds):
-    
-    """Function that takes a gds object as input and
-    outputs a PCA plot"""
-    
-    df_pca = gds.table
-    df_pca = df_pca.drop("ID_REF", axis=1)
-    df_pca = df_pca.set_index("IDENTIFIER")
-    
-    #changing column names to disease state
-    disease_state = pd.Series(gds.columns.iloc[:, 2])
-    df_pca.columns = disease_state
-    df_pca = df_pca.dropna() #DROP NaN????
-    
-    #center, scale and transform
-    #scale function expects samples to be rows
-    scaled_df = preprocessing.scale(df_pca.T)
-    
-    #create pca object
-    pca = PCA()
-    
-    #call fitt method to calculate loading scores
-    pca.fit(scaled_df)
-    
-    #generate coordenates for PCA graph based on loading scores and scaled data
-    pca_data = pca.transform(scaled_df)
-    
-    #calculate % of variation that each PC accounts for
-    per_var = np.round(pca.explained_variance_ratio_*100, decimals=1)
-    
-    #create labels for Scree Plot. One label per PC
-    labels = ["PC" + str(x) for x in range(1, len(per_var)+1)]
-    
-    #Put new coordinates, created by pca.transform into a matrix
-    pca_df = pd.DataFrame(pca_data, index = labels, columns=labels)
-    
-    ######not sure if this is correct ########
-    # Label to color dict (automatic)
-    label_color_dict = {label:idx for idx,label in enumerate(np.unique(df_pca.columns))}
-    # Color vector creation
-    cvec = [label_color_dict[label] for label in df_pca.columns]
-    
-    #plotting
-    plt.figure(figsize=(10, 6), dpi=100)
-    xxx = plt.scatter(pca_df.PC1, pca_df.PC2, c=cvec)
-
-    plt.title("Principal Component Analysis",fontsize=20,weight='bold')
-    plt.xlabel("PC1 - {0}%".format(per_var[0]),fontsize=16,weight='bold')
-    plt.ylabel("PC2 - {0}%".format(per_var[1]),fontsize=16,weight='bold')
-    h,l = xxx.legend_elements()
-    cond = np.unique(df_pca.columns)
-    plt.legend(h,cond)
+#     plt.title("Principal Component Analysis",fontsize=20,weight='bold')
+#     plt.xlabel("PC1 - {0}%".format(per_var[0]),fontsize=16,weight='bold')
+#     plt.ylabel("PC2 - {0}%".format(per_var[1]),fontsize=16,weight='bold')
+#     h,l = xxx.legend_elements()
+#     cond = np.unique(df_pca.columns)
+#     plt.legend(h,cond)
     
    
-    #####getting variation####
-    Variation_df = pd.DataFrame(per_var,index = labels, columns = ["% Variation"])
-    Variation_df = Variation_df.transpose()
+#     #####getting variation####
+#     Variation_df = pd.DataFrame(per_var,index = labels, columns = ["% Variation"])
+#     Variation_df = Variation_df.transpose()
     
     
-    return [xxx, Variation_df]
+#     return [xxx, Variation_df]
 
 
-# In[ ]:
+# def hca(gds):
 
-def hca(gds):
-
-    """This function takes a gds object as input and
-    outputs a a heatmap/dendrogram which allows the user to have a first
-    general overview of the data"""
+#     """This function takes a gds object as input and
+#     outputs a a heatmap/dendrogram which allows the user to have a first
+#     general overview of the data"""
   
-    df = gds.table
-    df = df.set_index('IDENTIFIER')
-    df.drop(columns=['ID_REF'], axis=1, inplace = True)
-    df = df.dropna() #if there are any
+#     df = gds.table
+#     df = df.set_index('IDENTIFIER')
+#     df.drop(columns=['ID_REF'], axis=1, inplace = True)
+#     df = df.dropna() #if there are any
 
-    disease_state = pd.Series(gds.columns.iloc[:, 2])
-    df.columns = disease_state
+#     disease_state = pd.Series(gds.columns.iloc[:, 2])
+#     df.columns = disease_state
 
-    df2 = df[~df.index.duplicated(keep="first")] #find the mean     
+#     df2 = df[~df.index.duplicated(keep="first")] #find the mean     
 
-    #transposing
+#     #transposing
 
-    df2_trans = df2.T 
-    std_genes = df2_trans.std()
+#     df2_trans = df2.T 
+#     std_genes = df2_trans.std()
 
     
-    #sorting highest to lowest
+#     #sorting highest to lowest
 
-    std_genes = std_genes.sort_values(ascending=False)
-    std_100genes = pd.DataFrame(std_genes[0:100])
-    df100 = df2.loc[std_100genes.index]
+#     std_genes = std_genes.sort_values(ascending=False)
+#     std_100genes = pd.DataFrame(std_genes[0:100])
+#     df100 = df2.loc[std_100genes.index]
 
-    heatmap_dendo = sns.clustermap(df100, cmap="coolwarm", figsize=(17,17))
+#     heatmap_dendo = sns.clustermap(df100, cmap="coolwarm", figsize=(17,17))
 
-    heatmap_dendo.show()
+#     heatmap_dendo.show()
 
-    return heatmap_dendo
+#     return heatmap_dendo
 
 
