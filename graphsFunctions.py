@@ -84,10 +84,10 @@ def gene_boxplot(gds):
     for patch, color in zip(box['boxes'], colourVector):
         patch.set_facecolor(color)
     
-    bxplot = plt.show()
+    plt.savefig('static/boxplot.png')
     
     
-    return bxplot
+    return True
 
 
 # # PCA
@@ -154,7 +154,6 @@ def pca_plot(gds):
     Variation_df = Variation_df.transpose()
     
     
-    
     return [xxx, Variation_df]
 
 
@@ -190,6 +189,7 @@ def hca(gds):
 
     heatmap_dendo = sns.clustermap(df100, cmap="coolwarm", figsize=(17,17))
 
+    heatmap_dendo.show()
 
     return heatmap_dendo
 
