@@ -9,6 +9,7 @@ from sklearn import preprocessing
 import base64
 from io import BytesIO
 from matplotlib.figure import Figure
+import seaborn as sns
 
 
 # # Import GDS file
@@ -87,100 +88,117 @@ def gene_boxplot(gds):
 
 # # PCA
 
-# def pca_plot(gds):
+def pca_plot(gds):
     
-#     """Function that takes a gds object as input and
-#     outputs a PCA plot"""
+    """Function that takes a gds object as input and
+    outputs a PCA plot"""
     
-#     df_pca = gds.table
-#     df_pca = df_pca.drop("ID_REF", axis=1)
-#     df_pca = df_pca.set_index("IDENTIFIER")
+    df_pca = gds.table
+    df_pca = df_pca.drop("ID_REF", axis=1)
+    df_pca = df_pca.set_index("IDENTIFIER")
     
-#     #changing column names to disease state
-#     disease_state = pd.Series(gds.columns.iloc[:, 2])
-#     df_pca.columns = disease_state
-#     df_pca = df_pca.dropna() #DROP NaN????
+    #changing column names to disease state
+    disease_state = pd.Series(gds.columns.iloc[:, 2])
+    df_pca.columns = disease_state
+    df_pca = df_pca.dropna() #DROP NaN????
     
-#     #center, scale and transform
-#     #scale function expects samples to be rows
-#     scaled_df = preprocessing.scale(df_pca.T)
+    #center, scale and transform
+    #scale function expects samples to be rows
+    scaled_df = preprocessing.scale(df_pca.T)
     
-#     #create pca object
-#     pca = PCA()
+    #create pca object
+    pca = PCA()
     
-#     #call fitt method to calculate loading scores
-#     pca.fit(scaled_df)
+    #call fitt method to calculate loading scores
+    pca.fit(scaled_df)
     
-#     #generate coordenates for PCA graph based on loading scores and scaled data
-#     pca_data = pca.transform(scaled_df)
+    #generate coordenates for PCA graph based on loading scores and scaled data
+    pca_data = pca.transform(scaled_df)
     
-#     #calculate % of variation that each PC accounts for
-#     per_var = np.round(pca.explained_variance_ratio_*100, decimals=1)
+    #calculate % of variation that each PC accounts for
+    per_var = np.round(pca.explained_variance_ratio_*100, decimals=1)
     
-#     #create labels for Scree Plot. One label per PC
-#     labels = ["PC" + str(x) for x in range(1, len(per_var)+1)]
+    #create labels for Scree Plot. One label per PC
+    labels = ["PC" + str(x) for x in range(1, len(per_var)+1)]
     
-#     #Put new coordinates, created by pca.transform into a matrix
-#     pca_df = pd.DataFrame(pca_data, index = labels, columns=labels)
+    #Put new coordinates, created by pca.transform into a matrix
+    pca_df = pd.DataFrame(pca_data, index = labels, columns=labels)
     
-#     ######not sure if this is correct ########
-#     # Label to color dict (automatic)
-#     label_color_dict = {label:idx for idx,label in enumerate(np.unique(df_pca.columns))}
-#     # Color vector creation
-#     cvec = [label_color_dict[label] for label in df_pca.columns]
+    ######not sure if this is correct ########
+    # Label to color dict (automatic)
+    label_color_dict = {label:idx for idx,label in enumerate(np.unique(df_pca.columns))}
+    # Color vector creation
+    cvec = [label_color_dict[label] for label in df_pca.columns]
     
-#     #plotting
-#     plt.figure(figsize=(10, 6), dpi=100)
-#     xxx = plt.scatter(pca_df.PC1, pca_df.PC2, c=cvec)
+    #plotting
+    fig = Figure(figsize=(10, 6), dpi=100)
+    ax = fig.subplots()
+    xxx = ax.scatter(pca_df.PC1, pca_df.PC2, c=cvec)
 
-#     plt.title("Principal Component Analysis",fontsize=20,weight='bold')
-#     plt.xlabel("PC1 - {0}%".format(per_var[0]),fontsize=16,weight='bold')
-#     plt.ylabel("PC2 - {0}%".format(per_var[1]),fontsize=16,weight='bold')
-#     h,l = xxx.legend_elements()
-#     cond = np.unique(df_pca.columns)
-#     plt.legend(h,cond)
+    ax.set_title("Principal Component Analysis",fontsize=20,weight='bold')
+    ax.set_xlabel("PC1 - {0}%".format(per_var[0]),fontsize=16,weight='bold')
+    ax.set_ylabel("PC2 - {0}%".format(per_var[1]),fontsize=16,weight='bold')
+    h,l = xxx.legend_elements()
+    cond = np.unique(df_pca.columns)
+    ax.legend(h,cond)
     
+    # save figure in memory for displaying in html
+    buf = BytesIO()
+    fig.savefig(buf, format='png')
+    # Embed the result in the html output.
+    data = base64.b64encode(buf.getbuffer()).decode("ascii")
+    img = f"data:image/png;base64,{data}"
    
-#     #####getting variation####
-#     Variation_df = pd.DataFrame(per_var,index = labels, columns = ["% Variation"])
-#     Variation_df = Variation_df.transpose()
+    #####getting variation####
+    Variation_df = pd.DataFrame(per_var,index = labels, columns = ["% Variation"])
+    Variation_df = Variation_df.transpose()
     
     
-#     return [xxx, Variation_df]
+    return [img, Variation_df]
 
 
-# def hca(gds):
+def hca(gds):
 
-#     """This function takes a gds object as input and
-#     outputs a a heatmap/dendrogram which allows the user to have a first
-#     general overview of the data"""
+    """This function takes a gds object as input and
+    outputs a a heatmap/dendrogram which allows the user to have a first
+    general overview of the data"""
   
-#     df = gds.table
-#     df = df.set_index('IDENTIFIER')
-#     df.drop(columns=['ID_REF'], axis=1, inplace = True)
-#     df = df.dropna() #if there are any
+    df = gds.table
+    df = df.set_index('IDENTIFIER')
+    df.drop(columns=['ID_REF'], axis=1, inplace = True)
+    df = df.dropna() #if there are any
 
-#     disease_state = pd.Series(gds.columns.iloc[:, 2])
-#     df.columns = disease_state
+    disease_state = pd.Series(gds.columns.iloc[:, 2])
+    df.columns = disease_state
 
-#     df2 = df[~df.index.duplicated(keep="first")] #find the mean     
+    df2 = df[~df.index.duplicated(keep="first")] #find the mean     
 
-#     #transposing
+    #transposing
 
-#     df2_trans = df2.T 
-#     std_genes = df2_trans.std()
+    df2_trans = df2.T 
+    std_genes = df2_trans.std()
 
     
-#     #sorting highest to lowest
+    #sorting highest to lowest
 
-#     std_genes = std_genes.sort_values(ascending=False)
-#     std_100genes = pd.DataFrame(std_genes[0:100])
-#     df100 = df2.loc[std_100genes.index]
+    std_genes = std_genes.sort_values(ascending=False)
+    std_100genes = pd.DataFrame(std_genes[0:100])
+    df100 = df2.loc[std_100genes.index]
 
-#     heatmap_dendo = sns.clustermap(df100, cmap="coolwarm", figsize=(17,17))
+    fig = Figure()
 
-#     heatmap_dendo.show()
+    ax1 = fig.subplots()
 
-#     return heatmap_dendo
+    heatmap_dendo = sns.clustermap(df100, cmap="coolwarm", figsize= (17,17), ax = ax1)
+
+
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+
+    # Embed the result in the html output.
+    data = base64.b64encode(buf.getbuffer()).decode("ascii")
+    img = f"data:image/png;base64,{data}"
+
+    return img
 
 

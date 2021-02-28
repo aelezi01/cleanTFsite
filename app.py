@@ -12,7 +12,7 @@ app_obj.secret_key = 'GroupProject-bioinformatics21'
 
 # configure app for the file upload
 app_obj.config['ALLOWED_GDS_FILES'] = ['SOFT', 'GDS']
-app_obj.config['SAVE_FILE_LOCATION'] = 'cleanTFsite/' 
+app_obj.config['SAVE_FILE_LOCATION'] = 'C:/Users/areda/Desktop/Group project/CleanTFsite/TFproject/cleanTFsite/' 
 
 
 # homepage page 
@@ -184,7 +184,7 @@ def upload_data():
         if allowed_GEOfile(new_file.filename):
             # this returns a secure name for the file
             secureGDSfilename = secure_filename(new_file.filename)
-
+            print(type(secureGDSfilename))
             # this saves the file
             new_file.save(os.path.join(app_obj.config['SAVE_FILE_LOCATION'], secureGDSfilename))
 
@@ -208,7 +208,8 @@ def stat_analysis(newdata):
         metadata = get_description(gds)
         simpleStatistic = get_sum(gds)
         boxplot = gene_boxplot(gds)
-        PCA = pca_plot(gds)
+        PCA = pca_plot(gds)[0]
+        HCA = hca(gds)
 
         return render_template('stat_analysis.html', gds = gds, metadata = metadata, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCA)
         #    return 'you will be able to upload data for %s soon' % newdata_name

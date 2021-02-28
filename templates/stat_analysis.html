@@ -2,41 +2,31 @@
 
 {% block content %}
 <div class="contentMargin">
-
-</div>
-
-
-<div>
-    <h1 class="headings">Results of data analysis</h1>
-</div>
-
-<div>
-    <h1 id="geneSymbol">{{TF_name}}</h1>
-    <h2 id="metadata" class="subheadings">Metadata collected from this data</h2>
-    <p>{{metadata}}</p>
-    <h2 id="simpleStatistics" class="subheadings">Simple summary statistics of the data</h2>
-    <p>{{simpleStatistics}}</p>
-    <h2 id="boxplot" class="subheadings">Boxplot</h2>
-    <img src='{{ boxplot }}' alt="boxplot of the dataset imported">
-    <h2 id="PCA" class="subheadings">Principal Component Analysis</h2>
-    <p>{{PCA}}</p>
-
-
+    <div>
+        <h1 class="headings">Results of data analysis</h1>
+    </div>
+    
+    <div>
+        <h1 id="geneSymbol">{{TF_name}}</h1>
+        <h2 id="metadata" class="subheadings">Metadata collected from this data</h2>
+        <p>{{metadata}}</p>
+        <h2 id="simpleStatistics" class="subheadings">Simple summary statistics of the data</h2>
+        <p>{{simpleStatistics}}</p>
+        <h2 id="boxplot" class="subheadings">Boxplot</h2>
+        <img src='{{ boxplot }}' alt="boxplot of the dataset imported">
+        <h2 id="PCA" class="subheadings">Principal Component Analysis</h2>
+        <img src='{{ PCA }}' alt="PCA graph">
+        <h2 id="HCA" class="subheadings">Hierarchical Clustering Analysis</h2>
+        <img src='{{ HCA }}' alt="HCA graph">
+    </div>
+    
     {% if PCAgraph == checked %}
         <p>{{PCA}}</p>
     {% endif %}
-<!--
-    <table border="1">
-        {% for key,value in result.items() %}
-            <tr> 
-                {{key}}
-            </tr>
-            <tr>
-                {{value}}
-            </tr>
-        {% endfor %}
-    </table>
+    
 </div>
--->
+
+
+
 
 {% endblock %}
