@@ -59,42 +59,6 @@ body {
     min-height: 100%;
 }
 
-/* loaders */
-
-.loading-container {
-    animation: rotate 3s linear infinite;
-    transform-origin: bottom center;
-    height: 10px;
-}
-
-@keyframes rotate {
-    to {
-        transform: rotate(360deg)
-    }
-}
-
-.circle {
-    animation: grow 1.5s linear infinite;
-    background-color: #5f9ea0;
-    border-radius: 50%;
-    display: inline-block;
-    transform: scale(0);
-    height: 40px;
-    width: 40px;
-    margin: auto;
-}
-
-.circle:nth-of-type(2) {
-    animation-delay: .75s;
-    background-color: #000000;
-}
-
-@keyframes grow {
-    50% {
-        transform: scale(1);
-    }
-}
-
 
 /* fonts designs */
 
@@ -238,6 +202,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    align-items: center;
 }
 
 .imageGraph {
@@ -293,7 +258,6 @@ p {
     margin: 3em;
     font: 0.9em;
     border-radius: 5px 5px 0 0;
-    overflow: hidden;
     box-shadow: 0px 0px 3px 0.1px gray;
     border-bottom: 2px solid black;
 }
@@ -317,4 +281,78 @@ p {
 
 .table tbody tr:hover {
     background-color: #f0f0f0;
+    transform: scale(1.01);
+    box-shadow: 0px 0px 3px 0.1px gray;
+}
+
+
+/* modal function in stat_analysis page */
+#myImg1, #myImg2, #myImg3 {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+  
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+.modal-content, #caption {  
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform: scale(0.1)} 
+    to {transform: scale(1)}
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 700px){
+.modal-content {
+    width: 100%;
 }

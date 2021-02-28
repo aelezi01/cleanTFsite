@@ -6,18 +6,23 @@
         <h1 class="headings">Results of data analysis</h1>
     </div>
 
-
+    <div>
+        <p>This table cointaines information about the metadata of your dataset<br>
+        please scroll down for your graphs and click on them for a wider image.</p>
+    </div>
+    
     <div style="overflow-x: auto;">
-        <h2 id="metadata" class="subheadings">Metadata</h2>
         <table class="table">
             <thead class="fontHeaders">
                 <th style="text-transform: capitalize ;">{{ header_key }}</th>
                 <th>{{ header_value[0] }}</th>
             </thead>
-            {% for key, value in metadata.items() %}
-                <tr class="fontBody">
+            {% for key, value in table_dictionary.items() %}
+                <tr class="fontBody" style="text-transform: capitalize;">
                     <th>{{ key }}</th>
-                    <td>{{ value[0] }}</td>
+                    <td>{% for x in value %}
+                            {{x}}
+                        {% endfor %}</td>
                 </tr>
             {% endfor %}
         </table>
@@ -26,25 +31,102 @@
 
     <div class="graphContainer">
         <div>
-            <h2 id="boxplot" class="headings">Distribution of Gene Expression across all samples</h2>
-            <img src='{{ boxplot }}' alt="Boxplot" class="imageGraph">
+            <h2 id="boxplot" class="headings">Distribution of Gene Expression<br>across all samples</h2>
+            <img src='{{ boxplot }}' alt="Boxplot" class="imageGraph" id="myImg">
         </div>
         <div>
-            <h2 id="PCA" class="headings">Principal Component Analysis</h2>
-            <img src='{{ PCA }}' alt="PCA graph" class="imageGraph">
+            <h2 id="PCA" class="headings">Principal Component Analysis <br>(PCA)</h2>
+            <img src='{{ PCA }}' alt="PCA graph" class="imageGraph" id="myImg1">
         </div>
         <div>
-            <h2 id="HCA" class="headings">Hierarchical Clustering Analysis</h2>
-            <img src='{{ HCA }}' alt="HCA graph" class="imageGraph">
+            <h2 id="HCA" class="headings">Hierarchical Clustering Analysis <br>(HCA)</h2>
+            <img src='{{ HCA }}' alt="HCA graph" class="imageGraph" id="myImg2">
         </div>
         <h2 id="simpleStatistics" class="subheadings">Simple summary statistics of the data</h2>
-        <img src="{{ simpleStatistics }}" alt="Basic Statistics">
+        <img src="{{ simpleStatistics }}" alt="Basic Statistics" id="myImg3">
         
     </div>
-    
+
+
     {% if PCAgraph == checked %}
         <p>{{PCA}}</p>
     {% endif %}
+
+    <!-- modal function for the graphs (javascript code)-->
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('myModal');
+        
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById('myImg');
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+        img.onclick = function(){
+          modal.style.display = "block";
+          modalImg.src = this.src;
+          captionText.innerHTML = this.alt;
+        }
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() { 
+          modal.style.display = "none";
+        }
+    </script>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('myModal');
+        
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById('myImg1');
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+        img.onclick = function(){
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
+        }
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() { 
+        modal.style.display = "none";
+        }
+    </script>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('myModal');
+        
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById('myImg2');
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+        img.onclick = function(){
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
+        }
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() { 
+        modal.style.display = "none";
+        }
+    </script>
     
 </div>
 

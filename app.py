@@ -203,14 +203,15 @@ def stat_analysis(newdata):
 
     with open(newdata, 'r'):
 
-        # initial process the dataset
+        # initial processing of the dataset
         gds = GDSinput(newdata)
 
         # functions for the metadata table
         metadata = get_description(gds)
         header_key = list(metadata)[0]
         header_value = metadata[header_key]
-        #table_dictionary = metadata.pop(header_key)
+        table_dictionary = metadata
+        del table_dictionary[next(iter(table_dictionary))]
 
         # get some basic statistical analysis and optional graphs
         simpleStatistic = get_sum(gds)
@@ -218,7 +219,7 @@ def stat_analysis(newdata):
         PCA = pca_plot(gds)[0]
         HCA = hca(gds)
 
-        return render_template('stat_analysis.html', metadata = metadata, header_key = header_key, header_value = header_value, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCA, HCA = HCA)
+        return render_template('stat_analysis.html', table_dictionary = table_dictionary, metadata = metadata, header_key = header_key, header_value = header_value, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCA, HCA = HCA)
         #    return 'you will be able to upload data for %s soon' % newdata_name
 
 
