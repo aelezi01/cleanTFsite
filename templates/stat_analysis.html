@@ -7,32 +7,39 @@
     </div>
 
 
-    <div>
+    <div style="overflow-x: auto;">
         <h2 id="metadata" class="subheadings">Metadata</h2>
         <table class="table">
             <thead class="fontHeaders">
-                <th>{{ header_key }}</th>
-                <th>{{ header_value }}</th>
+                <th style="text-transform: capitalize ;">{{ header_key }}</th>
+                <th>{{ header_value[0] }}</th>
             </thead>
             {% for key, value in metadata.items() %}
                 <tr class="fontBody">
                     <th>{{ key }}</th>
-                    <td>{{ value }}</td>
+                    <td>{{ value[0] }}</td>
                 </tr>
             {% endfor %}
         </table>
     </div>
     
 
-    <div>
+    <div class="graphContainer">
+        <div>
+            <h2 id="boxplot" class="headings">Distribution of Gene Expression across all samples</h2>
+            <img src='{{ boxplot }}' alt="Boxplot" class="imageGraph">
+        </div>
+        <div>
+            <h2 id="PCA" class="headings">Principal Component Analysis</h2>
+            <img src='{{ PCA }}' alt="PCA graph" class="imageGraph">
+        </div>
+        <div>
+            <h2 id="HCA" class="headings">Hierarchical Clustering Analysis</h2>
+            <img src='{{ HCA }}' alt="HCA graph" class="imageGraph">
+        </div>
         <h2 id="simpleStatistics" class="subheadings">Simple summary statistics of the data</h2>
-        <p>{{simpleStatistics}}</p>
-        <h2 id="boxplot" class="subheadings">Boxplot</h2>
-        <img src='{{ boxplot }}' alt="boxplot of the dataset imported">
-        <h2 id="PCA" class="subheadings">Principal Component Analysis</h2>
-        <img src='{{ PCA }}' alt="PCA graph">
-        <h2 id="HCA" class="subheadings">Hierarchical Clustering Analysis</h2>
-        <img src='{{ HCA }}' alt="HCA graph">
+        <img src="{{ simpleStatistics }}" alt="Basic Statistics">
+        
     </div>
     
     {% if PCAgraph == checked %}

@@ -66,9 +66,8 @@ def gene_boxplot(gds):
     colourVector = [emptyDict[label] for label in data2.columns]
 
 
-    fig = Figure(figsize = (10,5))
+    fig = Figure(figsize = (10,10))
     ax1 = fig.subplots()
-    ax1.set_title("Distribution of Gene Expression Across All Samples",fontsize=20,weight='bold' )
     ax1.set_xlabel("Samples",fontsize=20,weight='bold')
     ax1.set_ylabel("Gene Expression Level",fontsize=20,weight='bold')
     box = ax1.boxplot(npArray,patch_artist=True)
@@ -131,11 +130,10 @@ def pca_plot(gds):
     cvec = [label_color_dict[label] for label in df_pca.columns]
     
     #plotting
-    fig = Figure(figsize=(10, 6), dpi=100)
+    fig = Figure(figsize=(10, 10), dpi=100)
     ax = fig.subplots()
     xxx = ax.scatter(pca_df.PC1, pca_df.PC2, c=cvec)
 
-    ax.set_title("Principal Component Analysis",fontsize=20,weight='bold')
     ax.set_xlabel("PC1 - {0}%".format(per_var[0]),fontsize=16,weight='bold')
     ax.set_ylabel("PC2 - {0}%".format(per_var[1]),fontsize=16,weight='bold')
     h,l = xxx.legend_elements()
@@ -173,32 +171,24 @@ def hca(gds):
 
     df2 = df[~df.index.duplicated(keep="first")] #find the mean     
 
-    #transposing
+    # transposing
 
     df2_trans = df2.T 
     std_genes = df2_trans.std()
 
-    
-    #sorting highest to lowest
+    # sorting highest to lowest
 
     std_genes = std_genes.sort_values(ascending=False)
     std_100genes = pd.DataFrame(std_genes[0:100])
     df100 = df2.loc[std_100genes.index]
 
-    fig = Figure()
-
-    ax1 = fig.subplots()
-
-    heatmap_dendo = sns.clustermap(df100, cmap="coolwarm", figsize= (17,17))
-
-
     buf = BytesIO()
-    fig.savefig(buf, format="png")
+    
+    heatmap_dendo = sns.clustermap(df100, cmap="coolwarm", figsize= (17,17))
+    heatmap_dendo.savefig(buf, format = "png")
 
     # Embed the result in the html output.
     data = base64.b64encode(buf.getbuffer()).decode("ascii")
     img = f"data:image/png;base64,{data}"
 
     return img
-
-
