@@ -254,7 +254,7 @@ p {
 
 .table {
     border-collapse: collapse;
-    margin: 25px 0;
+    margin: 3em;
     font: 0.9em;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
