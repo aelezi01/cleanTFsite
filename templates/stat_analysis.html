@@ -5,11 +5,26 @@
     <div>
         <h1 class="headings">Results of data analysis</h1>
     </div>
-    
+
+
     <div>
-        <h1 id="geneSymbol">{{TF_name}}</h1>
         <h2 id="metadata" class="subheadings">Metadata collected from this data</h2>
-        <p>{{metadata}}</p>
+        <table class="table">
+            <thead class="fontHeaders">
+                <th>{{ header_key }}</th>
+                <th>{{ header_value }}</th>
+            </thead>
+            {% for key, value in metadata.items() %}
+                <tr class="fontBody">
+                    <th>{{ key }}</th>
+                    <td>{{ value }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    
+
+    <div>
         <h2 id="simpleStatistics" class="subheadings">Simple summary statistics of the data</h2>
         <p>{{simpleStatistics}}</p>
         <h2 id="boxplot" class="subheadings">Boxplot</h2>

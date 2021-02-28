@@ -64,6 +64,7 @@ body {
 
 .fontHeaders {
     font-family: 'PT Sans', sans-serif;
+    text-transform: capitalize;
 }
 
 .fontBody {

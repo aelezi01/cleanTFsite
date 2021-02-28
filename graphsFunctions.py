@@ -189,7 +189,7 @@ def hca(gds):
 
     ax1 = fig.subplots()
 
-    heatmap_dendo = sns.clustermap(df100, cmap="coolwarm", figsize= (17,17), ax = ax1)
+    heatmap_dendo = sns.clustermap(df100, cmap="coolwarm", figsize= (17,17))
 
 
     buf = BytesIO()

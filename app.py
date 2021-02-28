@@ -205,13 +205,17 @@ def stat_analysis(newdata):
         print(type(newdata))
 
         gds = GDSinput(newdata)
+
         metadata = get_description(gds)
+        header_key = list(metadata)[0]
+        header_value = metadata[header_key]
+
         simpleStatistic = get_sum(gds)
         boxplot = gene_boxplot(gds)
         PCA = pca_plot(gds)[0]
         HCA = hca(gds)
 
-        return render_template('stat_analysis.html', gds = gds, metadata = metadata, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCA)
+        return render_template('stat_analysis.html', header_key = header_key, header_value = header_value, gds = gds, metadata = metadata, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCA)
         #    return 'you will be able to upload data for %s soon' % newdata_name
 
 
