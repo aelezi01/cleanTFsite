@@ -41,7 +41,7 @@ def get_sum(gds):
     sumTable = sumTable.rename(index = {"count":"genes"})
 
     
-    return sumTable
+    return sumTable.to_dict()
 
 
 def gene_boxplot(gds):

@@ -6,9 +6,9 @@
         <h1 class="headings">Results of data analysis</h1>
     </div>
 
-    <div>
+    <div style="text-align: center;">
         <p>This table cointaines information about the metadata of your dataset.
-            Please scroll down for your graphs and click on them for a wider image.</p>
+            Please scroll down for your graphs and click on them for wider images.</p>
     </div>
 
     <div style="overflow-x: auto;">
@@ -28,7 +28,7 @@
         </table>
     </div>
     
-
+    <!--this div will display the optional graphs only if checked in the upload page-->
     <div class="graphContainer">
         <div>
             <h2 id="boxplot" class="headings">Distribution of Gene Expression<br>across all samples</h2>
@@ -43,14 +43,23 @@
             <img src='{{ HCA }}' alt="HCA graph" class="imageGraph" id="myImg2">
         </div>
         <h2 id="simpleStatistics" class="subheadings">Simple summary statistics of the data</h2>
-        <img src="{{ simpleStatistics }}" alt="Basic Statistics" id="myImg3">
-        
+        <div style="overflow-x: auto;">
+            <table class="table">
+                
+                {% for key, value in simpleStatistic.items() %}
+                    <tr class="fontBody" style="text-transform: capitalize;">
+                        <th>{{ key }}</th>
+                        <td>{% for x in value %}
+                                {{x}}
+                            {% endfor %}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
 
 
-    {% if PCAgraph == checked %}
-        <p>{{PCA}}</p>
-    {% endif %}
+    
 
     <!-- modal function for the graphs (javascript code)-->
     <div id="myModal" class="modal">

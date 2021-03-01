@@ -73,6 +73,7 @@ def TF(TF_name):
         pdbID = result[4]
         uniprotID = result[5]
         DBD = result[6]
+        subcellularLocation = result[7][21::]
 
         # create variable for displaying the chemical structure
         if pdbID:
@@ -83,7 +84,7 @@ def TF(TF_name):
 
         c.close()
         # return page with the information fetched from the database
-        return render_template('TF.html', TF_name = TF_name, ensemblID = ensemblID, entrezID = entrezID, pdbID = pdbID, uniprotID = uniprotID, DBD = DBD, tfStructure = tfStructure) 
+        return render_template('TF.html', TF_name = TF_name, ensemblID = ensemblID, entrezID = entrezID, pdbID = pdbID, uniprotID = uniprotID, DBD = DBD, tfStructure = tfStructure, subcellularLocation = subcellularLocation) 
 
 
 # drugs pages
@@ -216,10 +217,14 @@ def stat_analysis(newdata):
         # get some basic statistical analysis and optional graphs
         simpleStatistic = get_sum(gds)
         boxplot = gene_boxplot(gds)
-        PCA = pca_plot(gds)[0]
+        
+        if 'PCA' in request.form:
+            # this returns only the PCA graph
+            PCAplot = pca_plot(gds)[0]
+        
         HCA = hca(gds)
 
-        return render_template('stat_analysis.html', table_dictionary = table_dictionary, metadata = metadata, header_key = header_key, header_value = header_value, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCA, HCA = HCA)
+        return render_template('stat_analysis.html', table_dictionary = table_dictionary, metadata = metadata, header_key = header_key, header_value = header_value, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCAplot, HCA = HCA)
         #    return 'you will be able to upload data for %s soon' % newdata_name
 
 

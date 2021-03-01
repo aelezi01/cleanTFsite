@@ -42,27 +42,27 @@
           
             <div style="margin-left: 15%;" class="fontBody">
                 <div>              
-                    <input type="checkbox" id="PCA" value="graph" name="PCA" checked>  
+                    <input type="checkbox" id="boxplot" value="boxplot" name="graph" checked>  
+                    <label for="boxplot">Boxplot of Gene Expression levels</label>
+                </div>
+                <div>              
+                    <input type="checkbox" id="PCA" value="PCA" name="graph" checked>  
                     <label for="PCA">Principal Component Analysis (PCA)</label>
                 </div>
                 <div>               
-                    <input type="checkbox" id="HCA" value="graph" name="HCA" checked> 
+                    <input type="checkbox" id="HCA" value="HCA" name="graph" checked> 
                     <label for="HCA">Hierarchical Clustering Analysis (HCA)</label>
                 </div>
                 <div>               
-                    <input type="checkbox" id="HM" value="graph" name="heatmap" checked> 
-                    <label for="HM">Heatmap</label>
-                </div>
-                <div>               
-                    <input type="checkbox" id="TFO" value="graph" name="TFO" checked> 
+                    <input type="checkbox" id="TFO" value="TFO" name="graph" checked> 
                     <label for="TFO">List of Transcription Factors only</label>
                 </div>
                 <div>               
-                    <input type="checkbox" id="TFT" value="graph" name="TFT" checked> 
+                    <input type="checkbox" id="TFT" value="TFT" name="graph" checked> 
                     <label for="TFT">List of Transcription Factors and Targets</label>
                 </div>
                 <div>               
-                    <input type="checkbox" id="GSEA" value="graph" name="GSEA" checked> 
+                    <input type="checkbox" id="GSEA" value="GSEA" name="graph" checked> 
                     <label for="GSEA">Gene Set Enrichment Analysis (GSEA)</label>
                 </div>
                 <br><br>
@@ -71,6 +71,25 @@
         </div>
 
 
+        <script>
+            function display() {
+                var checkBox = document.getElementById("pca");
+                var text = document.getElementById("text");
+                if (document.getElementById("PCA").checked){
+                var x = document.getElementById("PCA").value;
+                }
+                alert("The value of the checkbox is: " + x);
+            }
+        </script>
+function myFunction() {
+    var checkBox = document.getElementById("tc");
+    var text = document.getElementById("text");
+    if (checkBox.checked == true){
+        text.style.display = "block";
+    } else {
+        text.style.display = "none";
+    }
+}
         <div>
             <div>
                 <p>For more information about the differential gene expression of your dataset, please upload here your tsv/csv file with the pre-ranked gene list:</p>
