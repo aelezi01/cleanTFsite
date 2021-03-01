@@ -31,18 +31,9 @@
     
     <div style="overflow-x: auto;">
         <h2 id="simpleStatistics" class="subheadings">Simple summary statistics of the data</h2>
-        
-        <table class="table">
-            
-            {% for key, value in simpleStatistic.items() %}
-                <tr class="fontBody" style="text-transform: capitalize;">
-                    <th>{{ key }}</th>
-                    <td>{% for x in value %}
-                            {{x}}
-                        {% endfor %}</td>
-                </tr>
-            {% endfor %}
-        </table>
+        {% for table in simpleStatistic %}
+            {{ table|safe }}
+        {% endfor %}
     </div>
     
     <!--this div will display the optional graphs only if checked in the upload page-->

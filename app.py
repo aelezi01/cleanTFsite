@@ -221,6 +221,7 @@ def stat_analysis(newdata):
 
         # get some basic statistical analysis and optional graphs
         simpleStatistic = get_sum(gds)
+
         
         
         # this returns only the boxplot graph
@@ -241,7 +242,7 @@ def stat_analysis(newdata):
         else:
             HCA = False
 
-        return render_template('stat_analysis.html', table_dictionary = table_dictionary, metadata = metadata, header_key = header_key, header_value = header_value, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCA, HCA = HCA)
+        return render_template('stat_analysis.html', table_dictionary = table_dictionary, metadata = metadata, header_key = header_key, header_value = header_value, simpleStatistic = [simpleStatistic.to_html()], boxplot = boxplot, PCA = PCA, HCA = HCA)
         #    return 'you will be able to upload data for %s soon' % newdata_name
 
 
