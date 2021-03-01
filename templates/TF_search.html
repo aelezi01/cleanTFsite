@@ -7,9 +7,6 @@
 		<h1 class="headings">Transcription Factors</h1>
 	</div>
 
-	<div>
-		<p>Find information about your desired transcription factor here</p>
-	</div>
 
 	<div>
 		<!--if the TF searched is not in our database, display an info message about it-->
@@ -37,10 +34,10 @@
 	<div>
 		<!--user will input their TF searches in this form-->
 		<form action="#" method="post">
-			<div>
-				<label for="TF_search">Type here the TF name:</label><br>
-				<input type="text" name="TF_protein" id="TF_protein" placeholder='eg. ARID5B' required style="border: 1px solid black;"><br><br>
-				<input type="submit"><br><br>
+			<div class="searchContent">
+				<label for="TF_search">Find information about transcription factors here:</label><br>
+				<input type="text" name="TF_protein" id="TF_protein" placeholder='eg. ARID5B' required class="searchBox"><br><br>
+				<input type="submit" class="searchButton"><br><br>
 			</div>
 		</form>
 	</div>
