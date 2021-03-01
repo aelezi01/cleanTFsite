@@ -7,7 +7,7 @@
     </div>
 
     <div style="text-align: center;">
-        <p>This table cointaines information about the metadata of your dataset.
+        <p>These tables contain information about the metadata and the summary statistics of your dataset.
             Please scroll down for your graphs and click on them for wider images.</p>
     </div>
 
@@ -27,35 +27,46 @@
             {% endfor %}
         </table>
     </div>
+
+    
+    <div style="overflow-x: auto;">
+        <h2 id="simpleStatistics" class="subheadings">Simple summary statistics of the data</h2>
+        
+        <table class="table">
+            
+            {% for key, value in simpleStatistic.items() %}
+                <tr class="fontBody" style="text-transform: capitalize;">
+                    <th>{{ key }}</th>
+                    <td>{% for x in value %}
+                            {{x}}
+                        {% endfor %}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
     
     <!--this div will display the optional graphs only if checked in the upload page-->
     <div class="graphContainer">
-        <div>
-            <h2 id="boxplot" class="headings">Distribution of Gene Expression<br>across all samples</h2>
-            <img src='{{ boxplot }}' alt="Boxplot" class="imageGraph" id="myImg">
-        </div>
-        <div>
-            <h2 id="PCA" class="headings">Principal Component Analysis <br>(PCA)</h2>
-            <img src='{{ PCA }}' alt="PCA graph" class="imageGraph" id="myImg1">
-        </div>
-        <div>
-            <h2 id="HCA" class="headings">Hierarchical Clustering Analysis <br>(HCA)</h2>
-            <img src='{{ HCA }}' alt="HCA graph" class="imageGraph" id="myImg2">
-        </div>
-        <h2 id="simpleStatistics" class="subheadings">Simple summary statistics of the data</h2>
-        <div style="overflow-x: auto;">
-            <table class="table">
-                
-                {% for key, value in simpleStatistic.items() %}
-                    <tr class="fontBody" style="text-transform: capitalize;">
-                        <th>{{ key }}</th>
-                        <td>{% for x in value %}
-                                {{x}}
-                            {% endfor %}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
+        {% if boxplot %}
+            <div>
+                <h2 id="boxplot" class="headings">Distribution of Gene Expression<br>across all samples</h2>
+                <img src='{{ boxplot }}' alt="Boxplot" class="imageGraph" id="myImg">
+            </div>
+        {% endif %}
+
+        {% if PCA %}
+            <div>
+                <h2 id="PCA" class="headings">Principal Component Analysis <br>(PCA)</h2>
+                <img src='{{ PCA }}' alt="PCA graph" class="imageGraph" id="myImg1">
+            </div>
+        {% endif %}
+        
+        {% if HCA %}
+            <div>
+                <h2 id="HCA" class="headings">Hierarchical Clustering Analysis <br>(HCA)</h2>
+                <img src='{{ HCA }}' alt="HCA graph" class="imageGraph" id="myImg2">
+            </div>
+        {% endif %}
     </div>
 
 

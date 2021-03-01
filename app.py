@@ -189,6 +189,11 @@ def upload_data():
             # this saves the file
             new_file.save(os.path.join(app_obj.config['SAVE_FILE_LOCATION'], secureGDSfilename))
 
+            # this gets the checked values
+            global checked
+            checked = request.form.getlist('graph')
+            
+
             return redirect(url_for('stat_analysis', newdata = secureGDSfilename))
         else:
             flash('The file uploaded is not compatible with our analysis tools.' + '\t' + 'Please upload a gds or soft file instead.')
@@ -203,7 +208,7 @@ def upload_data():
 def stat_analysis(newdata):
 
     with open(newdata, 'r'):
-
+                
         # initial processing of the dataset
         gds = GDSinput(newdata)
 
@@ -216,15 +221,27 @@ def stat_analysis(newdata):
 
         # get some basic statistical analysis and optional graphs
         simpleStatistic = get_sum(gds)
-        boxplot = gene_boxplot(gds)
         
-        if 'PCA' in request.form:
-            # this returns only the PCA graph
-            PCAplot = pca_plot(gds)[0]
         
-        HCA = hca(gds)
+        # this returns only the boxplot graph
+        if 'boxplot' in checked:
+            boxplot = gene_boxplot(gds)
+        else:
+            boxplot = False
+        
+        # this returns only the PCA graph
+        if 'PCA' in checked:
+            PCA = pca_plot(gds)[0]
+        else:
+            PCA = False
+    
+        # this returns only the HCA graph
+        if 'HCA' in checked:
+            HCA = hca(gds)
+        else:
+            HCA = False
 
-        return render_template('stat_analysis.html', table_dictionary = table_dictionary, metadata = metadata, header_key = header_key, header_value = header_value, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCAplot, HCA = HCA)
+        return render_template('stat_analysis.html', table_dictionary = table_dictionary, metadata = metadata, header_key = header_key, header_value = header_value, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCA, HCA = HCA)
         #    return 'you will be able to upload data for %s soon' % newdata_name
 
 
