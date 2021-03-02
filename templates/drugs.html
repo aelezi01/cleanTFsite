@@ -8,26 +8,34 @@
         <h1 class="headings">{{drug}}</h1>
     </div>
 
-    <li>
-        <h2 id="chemblID" class="subheadings">CHEMBL ID</h2>
-        <p>{{chemblID}}</p>
-        <h3 id="INCHIkey" class="subheadings">INCHI key</h2>
-        <p>{{INCHIkey}}</p>
-        <br>
-    </li>
+    <div style="display: flex; justify-content: space-evenly; align-items: center; flex-wrap: wrap;">
+        
+        <!--this section codes for the small table with the information pulled from the SQL database-->
+        <table class="table" style="flex: 2;">
+            <tr>
+                <th>CHEMBL ID</th>
+                <td>{{chemblID}}</td>
+            </tr>
+            <tr>
+                <th>INCHI key</th>
+                <td>{{INCHIkey}}</td>
+            </tr>
+        </table>
 
-    <!--display chemical structure-->
-    <div>
-        <img src="{{drugStructure}}" alt="{{drug}} chemical structure" style="box-shadow: 0px 0px 3px 0.1px gray;">
-    </div>
+        <!--display chemical structure-->
+        <picture>
+            <img src="{{drugStructure}}" alt="{{drug}} chemical structure" class="pic">
+        </picture>
 
-    {% if result_list %}
+
+        <!--if we have information about the specific TF targeted by this drug, it will display in this table-->
+        {% if result_list %}
         <div>
             <p>{{drug}} interacts with these transcriptor factors:</p>
             <br>
 
             
-            <table class="table">
+            <table class="table" style="flex: 1;">
                 <thead class="fontHeaders">
                     <th>Gene Symbol</th>
                     <th>TF name</th>
@@ -47,9 +55,7 @@
     {% else %}
         <p>There are no specific TFs known to interact with this drug.</p>
     {% endif %}
-    
-    
-
+    </div> 
 
 </div>
 

@@ -31,9 +31,11 @@
     
     <div style="overflow-x: auto;">
         <h2 id="simpleStatistics" class="subheadings">Simple summary statistics of the data</h2>
-        {% for table in simpleStatistic %}
-            {{ table|safe }}
-        {% endfor %}
+        <table class="table">
+            {% for table in simpleStatistic %}
+                {{ table|safe }}
+            {% endfor %}
+        </table>
     </div>
     
     <!--this div will display the optional graphs only if checked in the upload page-->

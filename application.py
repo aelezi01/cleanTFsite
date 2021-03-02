@@ -73,7 +73,7 @@ def TF(TF_name):
         pdbID = result[4]
         uniprotID = result[5]
         DBD = result[6]
-        subcellularLocation = result[7][21::]
+        subcellularLocation = result[7]
 
         # create variable for displaying the chemical structure
         if pdbID:
@@ -196,7 +196,7 @@ def upload_data():
 
             return redirect(url_for('stat_analysis', newdata = secureGDSfilename))
         else:
-            flash('The file uploaded is not compatible with our analysis tools.' + '\t' + 'Please upload a gds or soft file instead.')
+            flash('The file uploaded is not compatible with our analysis tools.' + '\t' + 'Please upload a gds or soft file instead to benefit from this data analysis feature.')
             return render_template('upload_data.html')
     else:
         return render_template('upload_data.html')

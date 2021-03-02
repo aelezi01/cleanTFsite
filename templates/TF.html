@@ -3,37 +3,45 @@
 {% block content %}
 
 <div class="contentMargin">
-  <div style="display: flex;">
-    <div class="headings">{{TF_name}}</div>
+  <div>
+    <h1 class="headings">{{TF_name}}</h1>
+  </div>
 
-    <!--this section codes for the paragraphs with the information pulled from the SQL database-->
-    <div style="margin-left: 2%; flex: 3;">
-      <h2 id="ensemblID" class="subheadings">Ensembl ID</h2>
-      <p>{{ensemblID}}</p>
-      <h2 id="entrezID" class="subheadings">Entrez ID</h2>
-      <p>{{entrezID}}</p>
-      <h2 id="pdbID" class="subheadings">Pdb ID</h2>
-      <p>{{pdbID}}</p>
-      <h2 id="uniprotID" class="subheadings">Uniprot ID</h2>
-      <p>{{uniprotID}}</p>
-      <h2 id="DBD" class="subheadings">DBD</h2>
-      <p>{{DBD}}</p>
-      <h2 id="subcellularLocation" class="subheadings">Subcellular Location</h2>
-      <p>{{ subcellularLocation }}</p>
-    </div>
-
-    <table class="table" style="display: table-column;">
-      <th>ensemble</th>
-      <tr>{{ensemblID}}</tr>
-      <th>entre</th>
-      <tr>{{entrezID}}</tr>
+  <div style="display: flex; justify-content: space-evenly; align-items: center; flex-wrap: wrap;">
+    
+    <!--this section codes for the table with the information pulled from the SQL database-->
+    <table class="table" style="flex: 2;">
+      <tr>
+        <th>Ensembl ID</th>
+        <td>{{ensemblID}}</td>
+      </tr>
+      <tr>
+        <th>Entrez ID</th>
+        <td>{{entrezID}}</td>
+      </tr>
+      <tr>
+        <th>Pdb ID</th>
+        <td>{{pdbID}}</td>
+      </tr>    
+      <tr>
+        <th>Uniprot ID</th>
+        <td>{{uniprotID}}</td>
+      </tr>    
+      <tr>
+        <th>DBD</th>
+        <td>{{DBD}}</td>
+      </tr>    
+      <tr>
+        <th>Subcellular Location</th>
+        <td>{{ subcellularLocation }}</td>
+      </tr>      
     </table>
 
     <!--display chemical structure-->
     {% if pdbID %}
-      <div>
-        <img src="{{tfStructure}}" alt="{{TF_name}} chemical structure" style="box-shadow: 0px 0px 3px 0.1px gray;">
-      </div>
+      <picture>
+        <img src="{{tfStructure}}" alt="{{TF_name}} chemical structure"  class="pic">
+      </picture>
     {% endif %}
 
   </div>

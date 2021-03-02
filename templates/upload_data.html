@@ -53,24 +53,36 @@
                     <input type="checkbox" id="HCA" value="HCA" name="graph" checked> 
                     <label for="HCA">Hierarchical Clustering Analysis (HCA)</label>
                 </div>
-                <div>               
-                    <input type="checkbox" id="TFO" value="TFO" name="graph" checked> 
-                    <label for="TFO">List of Transcription Factors only</label>
-                </div>
-                <div>               
-                    <input type="checkbox" id="TFT" value="TFT" name="graph" checked> 
-                    <label for="TFT">List of Transcription Factors and Targets</label>
-                </div>
-                <div>               
-                    <input type="checkbox" id="GSEA" value="GSEA" name="graph" checked> 
-                    <label for="GSEA">Gene Set Enrichment Analysis (GSEA)</label>
-                </div>
                 <br><br>
             </div>
             <br><br>
         </div>
-           
 
+
+        <div>
+            <p>These functions are optional as well, but they take much longer to load. <br>
+            Please tick them only if required. </p>
+
+            <div>
+                <div>               
+                    <input type="checkbox" id="TFO" value="TFO" name="graph"> 
+                    <label for="TFO">List of Transcription Factors only</label>
+                </div>
+                <div>               
+                    <input type="checkbox" id="TFT" value="TFT" name="graph"> 
+                    <label for="TFT">List of Transcription Factors and Targets</label>
+                </div>
+                <div>               
+                    <input type="checkbox" id="GSEA" value="GSEA" name="graph"> 
+                    <label for="GSEA">Gene Set Enrichment Analysis (GSEA)</label>
+                </div>
+            </div>
+        </div>
+
+
+
+           
+<!--NOT SURE WHETHER TO KEE THIS DIV OR NOT-->
         <div>
             <div>
                 <p>For more information about the differential gene expression of your dataset, please upload here your tsv/csv file with the pre-ranked gene list:</p>
