@@ -1,7 +1,7 @@
 import sqlite3
 import pandas as pd
 
-def get_transcription_factors_df():
+def get_transcription_factors_df(path_to_db):
     '''function that returns the transcription factors gene symbols in dataframe format'''
     # connect to the database - remember to check path
     conn = sqlite3.connect('web design/tfdata.db')
@@ -18,7 +18,7 @@ def get_transcription_factors_df():
 def get_target_genes():
     '''function that returns the target genes of all transcription factors'''
     # connect to the database
-    conn = sqlite3.connect('web design/tfdata.db')
+    conn = sqlite3.connect(path_to_db)
     # the query to execute
     query = "SELECT geneSymbol FROM targetGenes"
     # read into the dataframe
@@ -27,11 +27,11 @@ def get_target_genes():
     conn.close()
     return targetdf
 
-def get_TF_target():
+def get_TF_target(path_to_db):
     '''function that returns a dataframe containing the transcription factors
     and their target genes'''
     # connect to the database
-    conn = sqlite3.connect('web design/tfdata.db')
+    conn = sqlite3.connect(path_to_db)
     # the query to execute
     query = "SELECT TFGeneSymbol, targetGeneSymbol FROM targetsTF"
     # read into the dataframe
