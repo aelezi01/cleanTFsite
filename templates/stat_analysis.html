@@ -28,10 +28,9 @@
         </table>
     </div>
 
-    
+    <h2 id="simpleStatistics" class="headings">Simple summary statistics of the data</h2>
     <div style="overflow-x: auto;">
-        <h2 id="simpleStatistics" class="subheadings">Simple summary statistics of the data</h2>
-        <table class="table">
+        <table>
             {% for table in simpleStatistic %}
                 {{ table|safe }}
             {% endfor %}

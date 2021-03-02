@@ -201,7 +201,7 @@ footer {
     color: black; 
     padding: 1em; 
     font-size: medium; 
-    margin: 0.5em
+    margin-left: 3em;
 }
 
 .button2:hover {
@@ -220,6 +220,7 @@ footer {
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
+    margin-bottom: 3em;
 }
 
 .imageGraph {
@@ -330,6 +331,38 @@ footer {
     background-color: #f0f0f0;
     transform: scale(1.01);
     box-shadow: 0px 0px 3px 0.1px gray;
+}
+
+.table2 {
+    border-collapse: collapse;
+    margin: 3em;
+    font: 0.9em;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0px 0px 3px 0.1px gray;
+    border-bottom: 2px solid black;
+}
+
+.table2 thead tr {
+    background-color: #5f9ea0;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #000000;
+    font-family: 'PT Sans', sans-serif;
+}
+
+.table2 th, td {
+    padding: 12px 15px;
+}
+
+.table2 tbody tr {
+    border-bottom: 1px solid lightslategray;
+    font-family: 'Oxygen', sans-serif;
+}
+
+.table2 tbody tr:hover {
+    background-color: #f0f0f0;
+    box-shadow: 0px 0px 3px 0.1px gray;
+    font-weight: bold;
 }
 
 

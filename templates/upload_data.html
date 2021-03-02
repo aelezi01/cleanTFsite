@@ -18,7 +18,7 @@
         {% endwith %}
     </div>
       
-    <div style="display: flex; flex-wrap: wrap;">
+    <div style="display: flex;">
         
 
         <!--this forms allows the user to upload their files and select the graphs they want to show-->
@@ -30,20 +30,16 @@
 
             
             <!--the user can upload their GDS/soft data file here-->
-            <div style="float: right;">                
-                <br>
-                <label for="fileGEO" style="font-family: 'Oxygen', sans-serif;">Upload here:</label>
-                <input type="file" id="fileGEO" name="fileGEO" value="Select file" class="button2" required>
-                <br>                
+            <div style="text-align: center;"> 
+                <input type="file" id="fileGEO" name="fileGEO" value="Select file" class="button2" style="margin-bottom: 1em;" required>
             </div>
             
             <!--Here the user can select the additional graphs and data analysis they need from the GEO dataset-->
-            <div style="float: left;">
-                <br>
-                <p>Select here your optional analysis:</p>
+            <div>
+                <li style="text-indent: 10%;">Select here your optional analysis:</li>
             </div>
             
-            <div style="float: right;" class="fontBody">
+            <div class="options2" class="fontBody">
                 <div>              
                     <input type="checkbox" id="boxplot" value="boxplot" name="graph" checked>  
                     <label for="boxplot">Boxplot of Gene Expression levels</label>
@@ -56,17 +52,15 @@
                     <input type="checkbox" id="HCA" value="HCA" name="graph" checked> 
                     <label for="HCA">Hierarchical Clustering Analysis (HCA)</label>
                 </div>
-                <br><br>
             </div>
-            <br><br>
             
     
     
             <div>
-                <p>These functions are optional as well, but they take much longer to load. <br>
-                Please tick them only if required. </p>
+                <li style="text-indent: 10%; padding-top: 2.5rem; padding-bottom: 1.5rem;">These functions are optional as well, but they take much longer to load.
+                Please tick them only if required: </li>
     
-                <div>
+                <div class="options2">
                     <div>               
                         <input type="checkbox" id="TFO" value="TFO" name="graph"> 
                         <label for="TFO">List of Transcription Factors only</label>
@@ -89,39 +83,36 @@
             <div>
                 <div>
                     <p>For more information about the differential gene expression of your dataset, please upload here your tsv/csv file with the pre-ranked gene list:</p>
-                    <br>
                 </div>
-    
-                <div>
-                    <p>These functions take a while to load... <br> 
-                        You could spend your time: brewing coffee, sipping tea, playing with your pet.</p>
-                </div>
-    
+                        
                 <!--the user can upload their tsv/csv data file here-->
                 <div>
-                    <br>
-                    <input type="file" id="fileTSV" name="fileTSV" value="Select file" style="background-color: whitesmoke; color: black;">
-                    <br> 
+                    <input type="file" id="fileTSV" name="fileTSV" value="Select file" class="button2">
                 </div>
     
                 <div class="options2">
                     <div>               
-                        <input type="checkbox" id="GEtf" value="graph" name="GEtf" checked> 
+                        <input type="checkbox" id="GEtf" value="graph" name="GEtf"> 
                         <label for="GEtf">GE Transcription Factors only</label>
                     </div>
                     <div>               
-                        <input type="checkbox" id="GEtargets" value="graph" name="GEtargets" checked> 
+                        <input type="checkbox" id="GEtargets" value="graph" name="GEtargets"> 
                         <label for="GEtargets">GE Targets only</label>
                     </div>
                     <div>               
-                        <input type="checkbox" id="GETFT" value="graph" name="GETFT" checked> 
+                        <input type="checkbox" id="GETFT" value="graph" name="GETFT"> 
                         <label for="GETFT">GE Transcription Factors and Targets</label>
                     </div>
                 </div>
                 
                 <br>
+
+                <div>
+                    <p style="text-align: center;">These functions take a while to load... <br> 
+                        You could spend your time: brewing coffee, sipping tea, playing with your pet.</p>
+                </div>
     
-                <div style="text-align: center; padding: 1rem;">
+                <div style="text-align: center; padding: 1rem; flex-grow: 2; justify-content: center;">
                     <input value="Submit" type="submit" class="button1">
                     <input type="reset" value="Reset form" class="button1">
                 </div>

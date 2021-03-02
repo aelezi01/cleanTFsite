@@ -37,11 +37,16 @@
       </tr>      
     </table>
 
-    <!--display chemical structure-->
+    <!--display protein structure-->
     {% if pdbID %}
       <picture>
-        <img src="{{tfStructure[0]}}" src="{{tfStructure[1]}}" alt="{{TF_name}} chemical structure"  class="pic">
+        <img src="{{tfStructure[0]}}" alt="{{TF_name}} assembly protein structure not available"  class="pic">
       </picture>
+
+      <picture>
+        <img src="{{tfStructure[1]}}" alt="{{TF_name}} model protein structure not available"  class="pic">
+      </picture>
+
     {% endif %}
 
   </div>
