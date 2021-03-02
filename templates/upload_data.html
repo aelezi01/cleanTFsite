@@ -18,29 +18,32 @@
         {% endwith %}
     </div>
       
-    
-    <form action="#" method='post' enctype="multipart/form-data">
-        <div>
-            <div class="text1">
-                <p>You can upload here your GEO dataset data and receive a basic statistical analysis.</p>
-                <br>
-                <p>Additional graphs and analysis can be selected using the form below.</p>
+    <div style="display: flex; flex-wrap: wrap;">
+        
+
+        <!--this forms allows the user to upload their files and select the graphs they want to show-->
+        <form action="#" method='post' enctype="multipart/form-data">
+            <div>
+                <p>You can upload here your GEO dataset data and receive a basic statistical analysis.
+                <br>Additional graphs and analysis can be selected using the form below.</p>
             </div>
+
+            
             <!--the user can upload their GDS/soft data file here-->
-            <div class="uploadButton">                
+            <div style="float: right;">                
                 <br>
                 <label for="fileGEO" style="font-family: 'Oxygen', sans-serif;">Upload here:</label>
-                <input type="file" id="fileGEO" name="fileGEO" value="Select file" style="background-color: whitesmoke; color: black;" required>
+                <input type="file" id="fileGEO" name="fileGEO" value="Select file" class="button2" required>
                 <br>                
             </div>
-          
+            
             <!--Here the user can select the additional graphs and data analysis they need from the GEO dataset-->
-            <div>
+            <div style="float: left;">
                 <br>
                 <p>Select here your optional analysis:</p>
             </div>
-          
-            <div style="margin-left: 15%;" class="fontBody">
+            
+            <div style="float: right;" class="fontBody">
                 <div>              
                     <input type="checkbox" id="boxplot" value="boxplot" name="graph" checked>  
                     <label for="boxplot">Boxplot of Gene Expression levels</label>
@@ -56,77 +59,82 @@
                 <br><br>
             </div>
             <br><br>
-        </div>
-
-
-        <div>
-            <p>These functions are optional as well, but they take much longer to load. <br>
-            Please tick them only if required. </p>
-
-            <div>
-                <div>               
-                    <input type="checkbox" id="TFO" value="TFO" name="graph"> 
-                    <label for="TFO">List of Transcription Factors only</label>
-                </div>
-                <div>               
-                    <input type="checkbox" id="TFT" value="TFT" name="graph"> 
-                    <label for="TFT">List of Transcription Factors and Targets</label>
-                </div>
-                <div>               
-                    <input type="checkbox" id="GSEA" value="GSEA" name="graph"> 
-                    <label for="GSEA">Gene Set Enrichment Analysis (GSEA)</label>
-                </div>
-            </div>
-        </div>
-
-
-
-           
-<!--NOT SURE WHETHER TO KEE THIS DIV OR NOT-->
-        <div>
-            <div>
-                <p>For more information about the differential gene expression of your dataset, please upload here your tsv/csv file with the pre-ranked gene list:</p>
-                <br>
-            </div>
-
-            <div>
-                <p>These functions take a while to load... <br> 
-                    You could spend your time: brewing coffee, sipping tea, playing with your pet.</p>
-            </div>
-
-            <!--the user can upload their tsv/csv data file here-->
-            <div>
-                <br>
-                <input type="file" id="fileTSV" name="fileTSV" value="Select file" style="background-color: whitesmoke; color: black;">
-                <br> 
-            </div>
-
-            <div class="options2">
-                <div>               
-                    <input type="checkbox" id="GEtf" value="graph" name="GEtf" checked> 
-                    <label for="GEtf">GE Transcription Factors only</label>
-                </div>
-                <div>               
-                    <input type="checkbox" id="GEtargets" value="graph" name="GEtargets" checked> 
-                    <label for="GEtargets">GE Targets only</label>
-                </div>
-                <div>               
-                    <input type="checkbox" id="GETFT" value="graph" name="GETFT" checked> 
-                    <label for="GETFT">GE Transcription Factors and Targets</label>
-                </div>
-            </div>
             
-            <br>
-
-            <div style="text-align: center; padding: 1rem;">
-                <input value="Submit" type="submit" class="button1">
-                <input type="reset" value="Reset form" class="button1">
+    
+    
+            <div>
+                <p>These functions are optional as well, but they take much longer to load. <br>
+                Please tick them only if required. </p>
+    
+                <div>
+                    <div>               
+                        <input type="checkbox" id="TFO" value="TFO" name="graph"> 
+                        <label for="TFO">List of Transcription Factors only</label>
+                    </div>
+                    <div>               
+                        <input type="checkbox" id="TFT" value="TFT" name="graph"> 
+                        <label for="TFT">List of Transcription Factors and Targets</label>
+                    </div>
+                    <div>               
+                        <input type="checkbox" id="GSEA" value="GSEA" name="graph"> 
+                        <label for="GSEA">Gene Set Enrichment Analysis (GSEA)</label>
+                    </div>
+                </div>
             </div>
-            
-            <br><br>
+    
+    
+    
+               
+    <!--NOT SURE WHETHER TO KEE THIS DIV OR NOT-->
+            <div>
+                <div>
+                    <p>For more information about the differential gene expression of your dataset, please upload here your tsv/csv file with the pre-ranked gene list:</p>
+                    <br>
+                </div>
+    
+                <div>
+                    <p>These functions take a while to load... <br> 
+                        You could spend your time: brewing coffee, sipping tea, playing with your pet.</p>
+                </div>
+    
+                <!--the user can upload their tsv/csv data file here-->
+                <div>
+                    <br>
+                    <input type="file" id="fileTSV" name="fileTSV" value="Select file" style="background-color: whitesmoke; color: black;">
+                    <br> 
+                </div>
+    
+                <div class="options2">
+                    <div>               
+                        <input type="checkbox" id="GEtf" value="graph" name="GEtf" checked> 
+                        <label for="GEtf">GE Transcription Factors only</label>
+                    </div>
+                    <div>               
+                        <input type="checkbox" id="GEtargets" value="graph" name="GEtargets" checked> 
+                        <label for="GEtargets">GE Targets only</label>
+                    </div>
+                    <div>               
+                        <input type="checkbox" id="GETFT" value="graph" name="GETFT" checked> 
+                        <label for="GETFT">GE Transcription Factors and Targets</label>
+                    </div>
+                </div>
+                
+                <br>
+    
+                <div style="text-align: center; padding: 1rem;">
+                    <input value="Submit" type="submit" class="button1">
+                    <input type="reset" value="Reset form" class="button1">
+                </div>
+                
+                <br><br>
+    
+            </div>
+        </form>
 
-        </div>
-    </form>
+    </div>
+
+
+    
 </div>
 
 

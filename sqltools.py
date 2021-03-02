@@ -171,7 +171,12 @@ def get_pdb_url(pdbID):
     pdbid = pdbID.lower()
     dbi = pdbid[1:3]
     url = "https://cdn.rcsb.org/images/structures/" + dbi + "/" + pdbid + "/" + pdbid + "_assembly-1.jpeg"
-    return url
+
+    # the alternative url is in the case there is no assembly picture
+    alt_url = "https://cdn.rcsb.org/images/structures/" + dbi + "/" + pdbid + "/" + pdbid + "_models.jpeg"
+    
+    return [url, alt_url]
+
 
 def get_structure_url(ChemblID):
     '''function that returns the url for an image of the drug structure'''

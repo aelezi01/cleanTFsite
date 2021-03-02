@@ -40,7 +40,7 @@
     <!--display chemical structure-->
     {% if pdbID %}
       <picture>
-        <img src="{{tfStructure}}" alt="{{TF_name}} chemical structure"  class="pic">
+        <img src="{{tfStructure[0]}}" src="{{tfStructure[1]}}" alt="{{TF_name}} chemical structure"  class="pic">
       </picture>
     {% endif %}
 

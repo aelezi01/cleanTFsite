@@ -180,10 +180,6 @@ footer {
 
 /* upload page */
 
-.text1 {
-    padding: 1.5rem;
-}
-
 .button1 {
     color: black;
     background-color: white;
@@ -198,6 +194,18 @@ footer {
 .button1:hover {
     background-color: black;
     color: white;
+}
+
+.button2{
+    background-color: whitesmoke; 
+    color: black; 
+    padding: 1em; 
+    font-size: medium; 
+    margin: 0.5em
+}
+
+.button2:hover {
+    color: #5f9ea0;
 }
 
 .options2 {

@@ -31,11 +31,9 @@
         <!--if we have information about the specific TF targeted by this drug, it will display in this table-->
         {% if result_list %}
         <div>
-            <p>{{drug}} interacts with these transcriptor factors:</p>
-            <br>
-
+            <p style="padding: 0.5em;">{{drug}} interacts with these transcriptor factors:</p>
             
-            <table class="table" style="flex: 1;">
+            <table class="table" style="flex: 1; margin-top: 1em;">
                 <thead class="fontHeaders">
                     <th>Gene Symbol</th>
                     <th>TF name</th>
@@ -53,7 +51,7 @@
         </div>
 
     {% else %}
-        <p>There are no specific TFs known to interact with this drug.</p>
+        <p>Currently there are no specific TFs known to interact with this drug.</p>
     {% endif %}
     </div> 
 
