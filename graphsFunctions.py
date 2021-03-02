@@ -66,7 +66,7 @@ def gene_boxplot(gds):
     colourVector = [emptyDict[label] for label in data2.columns]
 
 
-    fig = Figure(figsize = (17,17))
+    fig = Figure(figsize = (10,10))
     ax1 = fig.subplots()
     ax1.set_xlabel("Samples",fontsize=20,weight='bold')
     ax1.set_ylabel("Gene Expression Level",fontsize=20,weight='bold')
@@ -130,7 +130,7 @@ def pca_plot(gds):
     cvec = [label_color_dict[label] for label in df_pca.columns]
     
     #plotting
-    fig = Figure(figsize=(17, 17), dpi=100)
+    fig = Figure(figsize=(10, 10), dpi=100)
     ax = fig.subplots()
     xxx = ax.scatter(pca_df.PC1, pca_df.PC2, c=cvec)
 

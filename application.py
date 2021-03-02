@@ -208,44 +208,47 @@ def upload_data():
 def stat_analysis(newdata):
 
     with open(newdata, 'r'):
-                
-        # initial processing of the dataset
-        gds = GDSinput(newdata)
+        try:        
+            # initial processing of the dataset
+            gds = GDSinput(newdata)
 
-        # functions for the metadata table
-        metadata = get_description(gds)
-        header_key = list(metadata)[0]
-        header_value = metadata[header_key]
-        table_dictionary = metadata
-        del table_dictionary[next(iter(table_dictionary))]
+            # functions for the metadata table
+            metadata = get_description(gds)
+            header_key = list(metadata)[0]
+            header_value = metadata[header_key]
+            table_dictionary = metadata
+            del table_dictionary[next(iter(table_dictionary))]
 
-        # get some basic statistical analysis and optional graphs
-        simpleStatistic1 = get_sum(gds)
-        simpleStatistic = [simpleStatistic1.to_html(classes = 'table2')]
+            # get some basic statistical analysis and optional graphs
+            simpleStatistic1 = get_sum(gds)
+            simpleStatistic = [simpleStatistic1.to_html(classes = 'table2')]
 
+            
+            
+            # this returns only the boxplot graph
+            if 'boxplot' in checked:
+                boxplot = gene_boxplot(gds)
+            else:
+                boxplot = False
+            
+            # this returns only the PCA graph
+            if 'PCA' in checked:
+                PCA = pca_plot(gds)[0]
+            else:
+                PCA = False
         
-        
-        # this returns only the boxplot graph
-        if 'boxplot' in checked:
-            boxplot = gene_boxplot(gds)
-        else:
-            boxplot = False
-        
-        # this returns only the PCA graph
-        if 'PCA' in checked:
-            PCA = pca_plot(gds)[0]
-        else:
-            PCA = False
-    
-        # this returns only the HCA graph
-        if 'HCA' in checked:
-            HCA = hca(gds)
-        else:
-            HCA = False
+            # this returns only the HCA graph
+            if 'HCA' in checked:
+                HCA = hca(gds)
+            else:
+                HCA = False
 
-        return render_template('stat_analysis.html', table_dictionary = table_dictionary, metadata = metadata, header_key = header_key, header_value = header_value, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCA, HCA = HCA)
-        #    return 'you will be able to upload data for %s soon' % newdata_name
+            return render_template('stat_analysis.html', table_dictionary = table_dictionary, metadata = metadata, header_key = header_key, header_value = header_value, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCA, HCA = HCA)
+            #    return 'you will be able to upload data for %s soon' % newdata_name
 
+        except Exception as err:
+            flash('Error: ' + str(err) + '\n' + 'We could not process your file, please upload a different file.')
+            return render_template('upload_data.html')
 
 # contact us pages
 
