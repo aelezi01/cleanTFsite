@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import sqlite3 as sql
 import functions_for_samar
 from graphsFunctions import GDSinput, get_description, get_sum, gene_boxplot, pca_plot, hca
-from sqltools import TFsearch_functionalities, drug_search_functionalities, get_pdb_url, get_structure_url
+from searchtools import TFsearch_functionalities, drug_search_functionalities, get_pdb_url, get_structure_url
 from werkzeug.utils import secure_filename
 import os
 
