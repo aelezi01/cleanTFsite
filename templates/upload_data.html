@@ -18,12 +18,12 @@
         {% endwith %}
     </div>
       
-    <div style="display: flex;">
+    <div>
         
 
         <!--this forms allows the user to upload their files and select the graphs they want to show-->
         <form action="#" method='post' enctype="multipart/form-data">
-            <div>
+            <div style="text-align: center;">
                 <p>You can upload here your GEO dataset data and receive a basic statistical analysis.
                 <br>Additional graphs and analysis can be selected using the form below.</p>
             </div>
@@ -52,30 +52,12 @@
                     <input type="checkbox" id="HCA" value="HCA" name="graph" checked> 
                     <label for="HCA">Hierarchical Clustering Analysis (HCA)</label>
                 </div>
-            </div>
-            
-    
-    
-            <div>
-                <li style="text-indent: 10%; padding-top: 2.5rem; padding-bottom: 1.5rem;">These functions are optional as well, but they take much longer to load.
-                Please tick them only if required: </li>
-    
-                <div class="options2">
-                    <div>               
-                        <input type="checkbox" id="TFO" value="TFO" name="graph"> 
-                        <label for="TFO">List of Transcription Factors only</label>
-                    </div>
-                    <div>               
-                        <input type="checkbox" id="TFT" value="TFT" name="graph"> 
-                        <label for="TFT">List of Transcription Factors and Targets</label>
-                    </div>
-                    <div>               
-                        <input type="checkbox" id="GSEA" value="GSEA" name="graph"> 
-                        <label for="GSEA">Gene Set Enrichment Analysis (GSEA)</label>
-                    </div>
+                <div>               
+                    <input type="checkbox" id="TFO" value="TFO" name="graph"> 
+                    <label for="TFO">Transcription Factors expression levels</label>
                 </div>
             </div>
-    
+            
 
             <div>
                 <div>

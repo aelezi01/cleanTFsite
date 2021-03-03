@@ -59,6 +59,24 @@
                 <img src='{{ HCA }}' alt="HCA graph" class="imageGraph" id="myImg2">
             </div>
         {% endif %}
+
+        {% if TFO %}
+        <!--this shows the heatmap for TFs only-->
+            <div>
+                <h2 id="TFO" class="headings">Transcription Factor only<br>(TFO)</h2>
+                <img src='{{ TFO }}' alt="TFO graph" class="imageGraph" id="myImg3">
+            </div>
+
+        <!--this shows the table with all the normalised TF expression level data-->
+            <div style="overflow-x: auto; overflow-y: scroll; max-height: 30em;">
+                <h2 id="TFO" class="headings">Mean relative expression levels<br>(Transcription Factors only)</h2>
+                <table>
+                    {% for table in tf_table %}
+                        {{ table|safe }}
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
     </div>
 
 
@@ -139,6 +157,29 @@
         modal.style.display = "none";
         }
     </script>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('myModal');
+    
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById('myImg3');
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+    img.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+    }
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() { 
+    modal.style.display = "none";
+    }
+</script>
     
 </div>
 

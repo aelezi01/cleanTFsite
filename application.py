@@ -5,6 +5,7 @@ from graphsFunctions import GDSinput, get_description, get_sum, gene_boxplot, pc
 from searchtools import TFsearch_functionalities, drug_search_functionalities, get_pdb_url, get_structure_url
 from werkzeug.utils import secure_filename
 import os
+from TFexpression import get_transcription_factors_df, TF_expr_heatmap
 
 # create a flask application object
 app_obj = Flask(__name__)
@@ -223,8 +224,7 @@ def stat_analysis(newdata):
             simpleStatistic1 = get_sum(gds)
             simpleStatistic = [simpleStatistic1.to_html(classes = 'table2')]
 
-            
-            
+                        
             # this returns only the boxplot graph
             if 'boxplot' in checked:
                 boxplot = gene_boxplot(gds)
@@ -243,7 +243,18 @@ def stat_analysis(newdata):
             else:
                 HCA = False
 
-            return render_template('stat_analysis.html', table_dictionary = table_dictionary, metadata = metadata, header_key = header_key, header_value = header_value, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCA, HCA = HCA)
+            tfdf = get_transcription_factors_df('tfdata.db')
+
+            # this return a table with all the TF present in the dataset
+            if 'TFO' in checked:
+                # returns a heatmap of TF expression and samples (top 50 based on SD)
+                tf_expression = TF_expr_heatmap(gds, tfdf)
+                tf_table = [tf_expression[1].to_html(classes='table2', max_cols = 10)]
+                TFO = tf_expression[0]
+            else:
+                TFO = False
+
+            return render_template('stat_analysis.html', tf_table = tf_table, TFO = TFO, table_dictionary = table_dictionary, metadata = metadata, header_key = header_key, header_value = header_value, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCA, HCA = HCA)
             #    return 'you will be able to upload data for %s soon' % newdata_name
 
         except Exception as err:
