@@ -14,7 +14,8 @@ app_obj.secret_key = 'GroupProject-bioinformatics21'
 app_obj.config['ALLOWED_GDS_FILES'] = ['SOFT', 'GDS']
 
 # save file location
-app_obj.config['SAVE_FILE_LOCATION'] = 'C:/Users/areda/Desktop/Group project/CleanTFsite/TFproject/cleanTFsite/' 
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+app_obj.config['SAVE_FILE_LOCATION'] = APP_ROOT
 
 
 
@@ -200,6 +201,7 @@ def upload_data():
             return redirect(url_for('stat_analysis', newdata = secureGDSfilename))
         else:
             flash('The file uploaded is not compatible with our analysis tools.' + '\t' + 'Please upload a gds or soft file instead to benefit from this data analysis feature.')
+            os.remove(os.path.join(application.config['SAVE_FILE_LOCATION'], secureGDSfilename))
             return render_template('upload_data.html')
     else:
         return render_template('upload_data.html')
@@ -209,9 +211,8 @@ def upload_data():
 ## this page allows the user to access statistical analysis of their dataset
 @app_obj.route('/upload_data/<newdata>/')
 def stat_analysis(newdata):
-
-    with open(newdata, 'r'):
-        try:        
+    try:
+        with open(newdata, 'r'):
             # initial processing of the dataset
             gds = GDSinput(newdata)
 
@@ -226,19 +227,19 @@ def stat_analysis(newdata):
             simpleStatistic1 = get_sum(gds)
             simpleStatistic = [simpleStatistic1.to_html(classes = 'table2')]
 
-                        
+
             # this returns only the boxplot graph
             if 'boxplot' in checked:
                 boxplot = gene_boxplot(gds)
             else:
                 boxplot = False
-            
+
             # this returns only the PCA graph
             if 'PCA' in checked:
                 PCA = pca_plot(gds)[0]
             else:
                 PCA = False
-        
+
             # this returns only the HCA graph
             if 'HCA' in checked:
                 HCA = hca(gds)
@@ -254,15 +255,18 @@ def stat_analysis(newdata):
                 tf_table = [tf_expression[1].to_html(classes='table2', max_cols = 10)]
                 TFO = tf_expression[0]
             else:
-                tf_table = False
                 TFO = False
+                tf_table = False
 
-            return render_template('stat_analysis.html', tf_table = tf_table, TFO = TFO, table_dictionary = table_dictionary, metadata = metadata, header_key = header_key, header_value = header_value, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCA, HCA = HCA)
-            #    return 'you will be able to upload data for %s soon' % newdata_name
+        os.remove(os.path.join(application.config['SAVE_FILE_LOCATION'], newdata))
+        return render_template('stat_analysis.html', tf_table = tf_table, TFO = TFO, table_dictionary = table_dictionary, metadata = metadata, header_key = header_key, header_value = header_value, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCA, HCA = HCA)
 
-        except Exception as err:
-            flash('Error: ' + str(err) + '\n' + 'We could not process your file, please upload a different file.')
-            return render_template('upload_data.html')
+    except Exception as err:
+        flash('Error: ' + str(err) + '\n' + 'We could not process your file, please upload a different file.')
+        os.remove(os.path.join(application.config['SAVE_FILE_LOCATION'], newdata))
+        return render_template('upload_data.html')
+
+   
 
 # contact us pages
 
