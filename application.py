@@ -250,6 +250,7 @@ def stat_analysis(newdata):
                 tf_table = [tf_expression[1].to_html(classes='table2', max_cols = 10)]
                 TFO = tf_expression[0]
             else:
+                tf_table = False
                 TFO = False
 
             return render_template('stat_analysis.html', tf_table = tf_table, TFO = TFO, table_dictionary = table_dictionary, metadata = metadata, header_key = header_key, header_value = header_value, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCA, HCA = HCA)
