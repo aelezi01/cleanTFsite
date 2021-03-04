@@ -201,7 +201,6 @@ def upload_data():
             return redirect(url_for('stat_analysis', newdata = secureGDSfilename))
         else:
             flash('The file uploaded is not compatible with our analysis tools.' + '\t' + 'Please upload a gds or soft file instead to benefit from this data analysis feature.')
-            os.remove(os.path.join(app_obj.config['SAVE_FILE_LOCATION'], secureGDSfilename))
             return render_template('upload_data.html')
     else:
         return render_template('upload_data.html')
