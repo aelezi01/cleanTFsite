@@ -201,7 +201,7 @@ def upload_data():
             return redirect(url_for('stat_analysis', newdata = secureGDSfilename))
         else:
             flash('The file uploaded is not compatible with our analysis tools.' + '\t' + 'Please upload a gds or soft file instead to benefit from this data analysis feature.')
-            os.remove(os.path.join(application.config['SAVE_FILE_LOCATION'], secureGDSfilename))
+            os.remove(os.path.join(app_obj.config['SAVE_FILE_LOCATION'], secureGDSfilename))
             return render_template('upload_data.html')
     else:
         return render_template('upload_data.html')
@@ -258,12 +258,12 @@ def stat_analysis(newdata):
                 TFO = False
                 tf_table = False
 
-        os.remove(os.path.join(application.config['SAVE_FILE_LOCATION'], newdata))
+        os.remove(os.path.join(app_obj.config['SAVE_FILE_LOCATION'], newdata))
         return render_template('stat_analysis.html', tf_table = tf_table, TFO = TFO, table_dictionary = table_dictionary, metadata = metadata, header_key = header_key, header_value = header_value, simpleStatistic = simpleStatistic, boxplot = boxplot, PCA = PCA, HCA = HCA)
 
     except Exception as err:
         flash('Error: ' + str(err) + '\n' + 'We could not process your file, please upload a different file.')
-        os.remove(os.path.join(application.config['SAVE_FILE_LOCATION'], newdata))
+        os.remove(os.path.join(app_obj.config['SAVE_FILE_LOCATION'], newdata))
         return render_template('upload_data.html')
 
    
