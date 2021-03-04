@@ -3,6 +3,7 @@ import sqlite3 as sql
 from graphsFunctions import GDSinput, get_description, get_sum, gene_boxplot, pca_plot, hca
 from searchtools import TFsearch_functionalities, drug_search_functionalities, get_pdb_url, get_structure_url
 from werkzeug.utils import secure_filename
+import os
 from TFexpression import get_transcription_factors_df, TF_expr_heatmap
 
 # create a flask application object
@@ -11,6 +12,9 @@ app_obj.secret_key = 'GroupProject-bioinformatics21'
 
 # configure app for the file upload
 app_obj.config['ALLOWED_GDS_FILES'] = ['SOFT', 'GDS']
+
+# save file location
+app_obj.config['SAVE_FILE_LOCATION'] = 'C:/Users/areda/Desktop/Group project/CleanTFsite/TFproject/cleanTFsite/' 
 
 
 
@@ -185,8 +189,8 @@ def upload_data():
             # this returns a secure name for the file
             secureGDSfilename = secure_filename(new_file.filename)
 
-            # this reads the file
-            new_file.read()
+            # this saves the file
+            new_file.save(os.path.join(app_obj.config['SAVE_FILE_LOCATION'], secureGDSfilename))
 
             # this gets the checked values
             global checked
